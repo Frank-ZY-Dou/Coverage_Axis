@@ -10,6 +10,7 @@ import torch
 real_name = '01Ants-12'
 surface_sample_num = 2000
 dilation = 0.02
+max_time_SCP = 90
 # inner_points = "voronoi"
 inner_points = "random"
 
@@ -53,7 +54,7 @@ D = torch.cdist(mesh_vertices_g, innerpoints_g, p=2)
 D = torch.gt(radius_g, D).type(torch.int)
 D = D.cpu().numpy()
 c = np.ones(len(inner_points))
-options = {"disp": True, "time_limit": 1000, }
+options = {"disp": True, "time_limit": max_time_SCP, }
 A,b =  D, np.ones(len(point_set))
 integrality = np.ones(len(inner_points))
 lb, ub = np.zeros(len(inner_points)), np.ones(len(inner_points))
