@@ -57,8 +57,8 @@ The output is placed in the folder `output`.
 <p align="center">
 <img src="./assets/fig_results.png" 
         alt="Picture" 
-        width="400" 
-        height="300" 
+        width="300" 
+        height="200" 
         style="display: block; margin: 0 auto" />
 </p>
 
