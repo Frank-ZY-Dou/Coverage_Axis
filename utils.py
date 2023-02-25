@@ -26,8 +26,6 @@ def save_obj(path, verts, faces=None):
 # Codes borrowed from https://gist.github.com/dendenxu/ee5008acb5607195582e7983a384e644#file-moller_trumbore-py-L27
 import torch
 
-
-
 def multi_indexing(index: torch.Tensor, shape: torch.Size, dim=-2):
     shape = list(shape)
     back_pad = len(shape) - index.ndim

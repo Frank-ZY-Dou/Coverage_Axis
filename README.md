@@ -22,12 +22,12 @@ This repo contains the code for **skeletal point selection** by solving SCP.
 # Key Features
 
 - Coverage Axis computation for mesh and point cloud inputs.
-- Operations are accelerated by GPU, e.g., coverage matrix computation and winding number for mesh.
+- Operations are accelerated by GPU, e.g., computation of coverage matrix and winding number for a mesh.
 
 
 # Requirements
 ## System requirements
-- Linux (tested on Ubuntu 20.04)
+- Linux Ubuntu 20.04
 - Python 3.8
 - Nvidia 3090 (GPU is used for acceleration)
 ## Installation
