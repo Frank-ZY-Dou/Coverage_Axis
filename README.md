@@ -1,6 +1,6 @@
 # Introduction
-Official code for the paper [Coverage Axis: Inner Point Selection for 3D Shape Skeletonization
-](https://arxiv.org/abs/2110.00965), Eurographics 2022.
+Official code for the paper **[Coverage Axis: Inner Point Selection for 3D Shape Skeletonization
+](https://arxiv.org/abs/2110.00965)**, Eurographics 2022.
 
 
 
