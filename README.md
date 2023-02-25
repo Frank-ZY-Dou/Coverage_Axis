@@ -57,8 +57,8 @@ The output is placed in the folder `output`.
 
 <img src="./assets/fig_results.png" 
         alt="Picture" 
-        width="800" 
-        height="600" 
+        width="400" 
+        height="300" 
         style="display: block; margin: 0 auto" />
 
 You may use randomly generated points inside the volume as inner candidate points by setting `inner_points = "random"
