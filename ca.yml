@@ -1,0 +1,6 @@
+name: CA
+channels:
+  - conda-forge
+dependencies:
+  - python=3.8
+  - boost-cpp=1.73.0
