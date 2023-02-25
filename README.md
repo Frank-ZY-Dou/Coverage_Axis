@@ -54,12 +54,13 @@ The output is placed in the folder `output`.
 - `mesh_samples_2000.obj` is the sampled surface points being covered.
 - `selected_inner_points.obj` is the selected inner points.
 
-
+<p align="center">
 <img src="./assets/fig_results.png" 
         alt="Picture" 
         width="400" 
         height="300" 
         style="display: block; margin: 0 auto" />
+</p>
 
 You may use randomly generated points inside the volume as inner candidate points by setting `inner_points = "random"
 `. 
