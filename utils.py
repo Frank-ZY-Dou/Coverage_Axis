@@ -10,6 +10,15 @@ def read_VD(path):
             radius.append([float(line[4])])
     return points, radius
 
+def read_point(path):
+    points = []
+    with open(path, "r") as f:
+        for line in f.readlines():
+            line = line.strip('\n')  # 去掉列表中每一个元素的换行符
+            line = line.split(' ')
+            points.append([float(line[1]), float(line[2]), float(line[3])])
+    return points
+
 
 def save_obj(path, verts, faces=None):
     verts = verts.tolist()

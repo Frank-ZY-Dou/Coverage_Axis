@@ -8,12 +8,12 @@ from utils import  save_obj,read_VD, winding_number
 from scipy.optimize import milp, Bounds, LinearConstraint
 
 
-real_name = '01Ants-12'
+real_name = '01Ants-12_mesh'
 surface_sample_num = 2000
-dilation = 0.02
+dilation = 0.025
 # inner_points = "voronoi"
 inner_points = "random"
-max_time_SCP = 100 # in second
+max_time_SCP = 1000 # in second
 
 
 mesh = trimesh.load('./input/%s.off'%real_name)
@@ -33,7 +33,6 @@ if inner_points == "voronoi":
 
 else:
     print("Generating random samples inside the shape...")
-
     if os.path.exists("./input/%s_random.obj"%real_name):
         inner_points = trimesh.load("./input/%s_random.obj"%real_name)
         inner_points = np.array(inner_points.vertices)
@@ -75,7 +74,7 @@ else:
 
 save_obj("./output/mesh.obj", mesh_vertices, mesh_faces)
 save_obj("./output/mesh_samples_%d.obj"%surface_sample_num, point_set)
-save_obj("./output/inner_points.obj", inner_points)
+save_obj("./output/mesh_inner_points.obj", inner_points)
 
 # Coverage Matrix -> GPU.
 point_set_g = torch.tensor(point_set).cuda().double()
@@ -107,7 +106,7 @@ print(res_milp)
 print(np.sum(res_milp.x))
 value_pos = np.nonzero(res_milp.x)[0]
 print("The number of selected inner points: ", len(value_pos))
-save_obj("./output/selected_inner_points.obj", inner_points[value_pos])
+save_obj("./output/mesh_selected_inner_points.obj", inner_points[value_pos])
 
 
 
