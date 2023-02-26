@@ -29,7 +29,7 @@ This repo contains the code for **skeletal point selection** by solving SCP.
 ## System requirements
 - Linux Ubuntu 20.04
 - Python 3.8
-- Nvidia 3090 (GPU is used for acceleration)
+- Nvidia GeForce RTX 3090 (GPU is used for acceleration)
 ## Installation
 
 ```angular2html
