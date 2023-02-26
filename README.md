@@ -80,7 +80,7 @@ python Coverage_Axis_mesh.py
 
 We use [Fast Winding Number](https://www.dgp.toronto.edu/projects/fast-winding-numbers/) for Inside-outside determination for point cloud inputs.
 
-Please use the following commands for building the modified [libigl](https://libigl.github.io/tutorial/) at https://github.com/Frank-ZY-Dou/libigl_CA. Note that [Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page#Download) is needed for libigl, make sure you have installed it.
+Please use the following commands for building the modified [libigl](https://libigl.github.io/tutorial/) at https://github.com/Frank-ZY-Dou/libigl_CA. Note that [Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page#Download) is needed for libigl; make sure you have installed it.
 
 ```angular2html
 sudo apt-get install git
