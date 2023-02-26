@@ -2,8 +2,6 @@
 Official code for the paper **[Coverage Axis: Inner Point Selection for 3D Shape Skeletonization
 ](https://arxiv.org/abs/2110.00965), Eurographics 2022**.
 
-
-
 Authors: [Zhiyang Dou](https://frank-zy-dou.github.io/), 
 [Cheng Lin](https://clinplayer.github.io/), 
 [Rui Xu](https://xrvitd.github.io/index.html), 
