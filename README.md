@@ -47,7 +47,9 @@ Specify the settings for Coverage Axis in ```Coverage_Axis_mesh.py```
 real_name = '01Ants-12'
 surface_sample_num = 2000
 dilation = 0.02
-inner_points = "voronoi"
+# inner_points = "voronoi"
+inner_points = "random"
+max_time_SCP = 100 # in second
 ```
 Run
 ```angular2html
@@ -94,12 +96,12 @@ sudo apt-get install libxcursor-dev
 sudo apt install libeigen3-dev
 sudo apt-get install libcgal-dev
 
-git clone https://github.com/libigl/libigl.git
-cd libigl/
+git clone https://github.com/Frank-ZY-Dou/libigl_CA.git
+cd libigl_CA/
 mkdir build
 cd build
 cmake ../
-make -j4
+make -j4 
 ```
 You also needs to install [Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page#Download). 
 
