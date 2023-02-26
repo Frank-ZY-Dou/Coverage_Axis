@@ -106,7 +106,7 @@ cd bin
 ./FastWindingNumber_CA ../../../input/01Ants-12_mesh.off ../../../input/01Ants-12_pc.obj ../../../input/01Ants-12_pc_random.obj
 ```
 
-A point cloud input in `.obj` will be written to `01Ants-12_pc.obj` in the folder `input`. And a randomly sampled point cloud inside the volume will be written to `01Ants-12_pc_random.obj` in the folder `input`. 
+A point cloud will be saved to `01Ants-12_pc.obj` in the folder `input`. A randomly generated candidate skeletal points will be written to `01Ants-12_pc_random.obj` under the folder `input`. 
 
 Then run
 ```angular2html
