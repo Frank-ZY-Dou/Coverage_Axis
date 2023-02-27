@@ -136,6 +136,7 @@ Other sampling strategies, like Voronoi-based sampling, can also be used. The co
 # More Information
 ### Solve Coverage Axis in MATLAB
 The original optimization is solved by MATLAB. In this repo, we solve SCP by Scipy in Python. 
+
 *I found the solver of MILP in scipy is a little unstable compared with the MATLAB one; please suggest if you have a more powerful solver or any idea for this. Thanks ;)*
 ```angular2html
 f =  ones(1,medial_num); 
