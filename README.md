@@ -152,6 +152,20 @@ disp('min_number:');
 disp(fval);
 ```
 
+# Citation
+```angular2html
+@inproceedings{dou2022coverage,
+  title={Coverage Axis: Inner Point Selection for 3D Shape Skeletonization},
+  author={Dou, Zhiyang and Lin, Cheng and Xu, Rui and Yang, Lei and Xin, Shiqing and Komura, Taku and Wang, Wenping},
+  booktitle={Computer Graphics Forum},
+  volume={41},
+  number={2},
+  pages={419--432},
+  year={2022},
+  organization={Wiley Online Library}
+}
+```
+
 # References
 - https://libigl.github.io/tutorial/  Many thanks to the contributors of libigl :)
 - https://www.cgal.org/
