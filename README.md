@@ -11,7 +11,7 @@ Authors: [Zhiyang Dou](https://frank-zy-dou.github.io/),
 [Taku Komura](https://i.cs.hku.hk/~taku/), 
 [Wenping Wang](https://engineering.tamu.edu/cse/profiles/Wang-Wenping.html).
 
-[[Project Page](https://frank-zy-dou.github.io/projects/CoverageAxis/index.html)]] [[Paper](https://arxiv.org/abs/2110.00965)][[Code](https://github.com/Frank-ZY-Dou/Coverage_Axis)]
+[[Project Page](https://frank-zy-dou.github.io/projects/CoverageAxis/index.html)][[Paper](https://arxiv.org/abs/2110.00965)][[Code](https://github.com/Frank-ZY-Dou/Coverage_Axis)]
 
 ![teasar](./assets/fig_teaser.jpg)
 In this paper, we present a simple yet effective formulation called Coverage Axis for 3D shape skeletonization. Inspired by the set cover problem, our key idea is to cover all the surface points using as few inside medial balls as possible. This formulation inherently induces a compact and expressive approximation of the Medial Axis Transform (MAT) of a given shape. Different from previous methods that rely on local approximation error, our method allows a global consideration of the overall shape structure, leading to an efficient high-level abstraction and superior robustness to noise. Another appealing aspect of our method is its capability to handle more generalized input such as point clouds and poor-quality meshes. Extensive comparisons and evaluations demonstrate the remarkable effectiveness of our method for generating compact and expressive skeletal representation to approximate the MAT.
