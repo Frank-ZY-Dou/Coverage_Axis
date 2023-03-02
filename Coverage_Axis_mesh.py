@@ -6,6 +6,7 @@ import numpy as np
 from tqdm import tqdm
 from utils import  save_obj,read_VD, winding_number
 from scipy.optimize import milp, Bounds, LinearConstraint
+from mip import Model, xsum, maximize, BINARY
 
 
 real_name = '01Ants-12_mesh'
@@ -62,12 +63,12 @@ else:
         winding_con = torch.cat(winding_con, dim=0)
         inner_points = P[winding_con.cpu().numpy() > 0.5]
         save_obj("./input/%s_random.obj"%real_name, inner_points)
-
     inner_points_g = torch.tensor(inner_points).cuda().double()
     point_set_g = torch.tensor(point_set).cuda().double()
     dist = torch.cdist(inner_points_g, point_set_g, p=2)
     radius = dist.topk(1, largest=False).values
     radius = radius + dilation
+
 
 
 
@@ -94,6 +95,7 @@ integrality = np.ones(len(inner_points))
 lb, ub = np.zeros(len(inner_points)), np.ones(len(inner_points))
 variable_bounds = Bounds(lb, ub)
 constraints = LinearConstraint(A, lb=b)
+
 res_milp = milp(
     c,
     integrality=integrality,
