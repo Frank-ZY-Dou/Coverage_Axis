@@ -69,10 +69,6 @@ else:
     radius = dist.topk(1, largest=False).values
     radius = radius + dilation
 
-
-
-
-
 save_obj("./output/mesh.obj", mesh_vertices, mesh_faces)
 save_obj("./output/mesh_samples_%d.obj"%surface_sample_num, point_set)
 save_obj("./output/mesh_inner_points.obj", inner_points)

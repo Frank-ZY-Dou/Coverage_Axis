@@ -25,7 +25,6 @@ dist = torch.cdist(inner_points_g, point_set_g, p=2)
 radius = dist.topk(1, largest=False).values
 radius = radius + dilation
 
-
 save_obj("./output/pc_samples.obj", point_set) # to be covered surface samples.
 save_obj("./output/pc_inner_points.obj", inner_points) # candidate inner points.
 
