@@ -1,0 +1,6 @@
+﻿  SlabMesh.cpp
+  Unknown compiler version - please run the configure tests and report the results
+C:\dev\boost_1_56_0\boost/format/alt_sstream_impl.hpp : warning C4819: The file contains a character that cannot be represented in the current code page (936). Save the file in Unicode format to prevent data loss
+C:\Program Files\CGAL-4.8.1\include\CGAL/Mesh_3/global_parameters.h(25): warning C4005: 'BOOST_PARAMETER_MAX_ARITY': macro redefinition
+  C:\Program Files\CGAL-4.8.1\include\CGAL/Mesh_3/global_parameters.h(25): note: command-line arguments:  see previous definition of 'BOOST_PARAMETER_MAX_ARITY'
+  qmat.vcxproj -> F:\Proj_P2S\qmat_x64\x64\Release\qmat.exe

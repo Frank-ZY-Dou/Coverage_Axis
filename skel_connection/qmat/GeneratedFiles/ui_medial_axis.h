@@ -1,0 +1,556 @@
+/********************************************************************************
+** Form generated from reading UI file 'medial_axis.ui'
+**
+** Created by: Qt User Interface Compiler version 5.9.9
+**
+** WARNING! All changes made in this file will be lost when recompiling UI file!
+********************************************************************************/
+
+#ifndef UI_MEDIAL_AXIS_H
+#define UI_MEDIAL_AXIS_H
+
+#include <QtCore/QVariant>
+#include <QtWidgets/QAction>
+#include <QtWidgets/QApplication>
+#include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QHeaderView>
+#include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
+#include <QtWidgets/QMenuBar>
+#include <QtWidgets/QStatusBar>
+#include <QtWidgets/QToolBar>
+#include <QtWidgets/QWidget>
+
+QT_BEGIN_NAMESPACE
+
+class Ui_medial_axisClass
+{
+public:
+    QAction *actionOpen_Off;
+    QAction *actionExit;
+    QAction *actionShow_Vertex;
+    QAction *actionShow_Edge;
+    QAction *actionDT;
+    QAction *actionVoronoi_Diagram;
+    QAction *actionShow_MAT;
+    QAction *actionShow_Sphere;
+    QAction *actionShow_Face;
+    QAction *actionOpen_Off_simple;
+    QAction *actionShow_Facet_Normal;
+    QAction *actionShow_Initial;
+    QAction *actionShow_Initial_Edge;
+    QAction *actionShow_Initial_Face;
+    QAction *actionShow_Initial_Sphere;
+    QAction *actionShow_Sphere_Vertex;
+    QAction *actionShow_Sphere_Edge;
+    QAction *actionShow_Sphere_Mesh_Envelop;
+    QAction *actionShow_Sphere_Mesh_Sphere;
+    QAction *actionSimplifiy_SM;
+    QAction *actionSimplify_by_50;
+    QAction *actionSimplify_by_10;
+    QAction *actionOpen_MA;
+    QAction *actionExport_MA;
+    QAction *actionOpen_Medial_Axis;
+    QAction *actionExport_Medial_Axis;
+    QAction *actionImport_Medial_Axis;
+    QAction *actionRemesh_Medial_Axis;
+    QAction *actionCompute_Medial_Axis;
+    QAction *actionMA_Simplify_One;
+    QAction *actionQEM_Vertex;
+    QAction *actionQEM_Edge;
+    QAction *actionQEM_Face;
+    QAction *actionSimplify_QEM_50;
+    QAction *actionSimplify_QEM;
+    QAction *actionSimplify_MA;
+    QAction *actionSimplify_MA_Fifty;
+    QAction *actionMA_QEM_Vertex;
+    QAction *actionMA_QEM_Edge;
+    QAction *actionMA_QEM_Envelop;
+    QAction *actionMA_QEM_Sphere;
+    QAction *actionSimplify_MA_Ten;
+    QAction *actionShow_Centroid_Point;
+    QAction *actionShow_Envelop;
+    QAction *actionExport_MA_QEM;
+    QAction *actionShow_Fake_Boundary_Vertex;
+    QAction *actionShow_Boundary_Vertex;
+    QAction *actionShow_NonManifold_Vertex;
+    QAction *actionShow_Saved_Vertex;
+    QAction *actionSlab_Vertex;
+    QAction *actionSlab_Edge;
+    QAction *actionSlab_Envelop;
+    QAction *actionSlab_Sphere;
+    QAction *actionSimplify_Slab;
+    QAction *actionShow_stability_ratio;
+    QAction *actionInitial_VQEM;
+    QAction *actionInitial_Slab;
+    QAction *actionDetermine_Vertex_Type;
+    QAction *actionInitial_Boundary_Edge;
+    QAction *actionSlab_face;
+    QAction *actionShrink_Sphere;
+    QAction *actionShrink_Envelop;
+    QAction *actionMethodOne;
+    QAction *actionMethodTwo;
+    QAction *actionMethodThree;
+    QAction *actionPreserve_Saved_Vertex;
+    QAction *actionInitialize;
+    QAction *actionComputer_Hausdorff;
+    QAction *actionScale_One;
+    QAction *actionScale_Two;
+    QAction *action_Other_Scale;
+    QAction *actionClear_Error;
+    QAction *actionZoom_MA;
+    QAction *actionPrevent_Inversion;
+    QAction *actionTypeOne;
+    QAction *actionTypeTwo;
+    QAction *actionSet_k_value;
+    QAction *actionPick_Mode;
+    QAction *actionSave_EPS;
+    QAction *actionSave_ViewPoint;
+    QAction *actionLoad_ViewPoint;
+    QAction *actionReverse_Orientation;
+    QAction *actionHeadBar;
+    QAction *actionColorBar;
+    QAction *actionSmooth_Render;
+    QAction *actionFace_Color;
+    QAction *actionOpen_PointCloud;
+    QAction *actionStability_Ratio;
+    QWidget *centralWidget;
+    QMenuBar *menuBar;
+    QMenu *menuFile;
+    QMenu *menuMesh;
+    QMenu *menuSlab;
+    QMenu *menuRender_Option;
+    QToolBar *mainToolBar;
+    QStatusBar *statusBar;
+
+    void setupUi(QMainWindow *medial_axisClass)
+    {
+        if (medial_axisClass->objectName().isEmpty())
+            medial_axisClass->setObjectName(QStringLiteral("medial_axisClass"));
+        medial_axisClass->resize(1516, 598);
+        QIcon icon;
+        icon.addFile(QStringLiteral("Icons/open.png"), QSize(), QIcon::Normal, QIcon::Off);
+        medial_axisClass->setWindowIcon(icon);
+        actionOpen_Off = new QAction(medial_axisClass);
+        actionOpen_Off->setObjectName(QStringLiteral("actionOpen_Off"));
+        actionOpen_Off->setIcon(icon);
+        actionExit = new QAction(medial_axisClass);
+        actionExit->setObjectName(QStringLiteral("actionExit"));
+        actionShow_Vertex = new QAction(medial_axisClass);
+        actionShow_Vertex->setObjectName(QStringLiteral("actionShow_Vertex"));
+        actionShow_Vertex->setCheckable(true);
+        actionShow_Edge = new QAction(medial_axisClass);
+        actionShow_Edge->setObjectName(QStringLiteral("actionShow_Edge"));
+        actionShow_Edge->setCheckable(true);
+        actionDT = new QAction(medial_axisClass);
+        actionDT->setObjectName(QStringLiteral("actionDT"));
+        actionDT->setCheckable(true);
+        QIcon icon1;
+        icon1.addFile(QStringLiteral("Icons/selected.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionDT->setIcon(icon1);
+        actionVoronoi_Diagram = new QAction(medial_axisClass);
+        actionVoronoi_Diagram->setObjectName(QStringLiteral("actionVoronoi_Diagram"));
+        actionVoronoi_Diagram->setCheckable(true);
+        QIcon icon2;
+        icon2.addFile(QStringLiteral("Icons/voronoi.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionVoronoi_Diagram->setIcon(icon2);
+        actionShow_MAT = new QAction(medial_axisClass);
+        actionShow_MAT->setObjectName(QStringLiteral("actionShow_MAT"));
+        actionShow_MAT->setCheckable(true);
+        actionShow_MAT->setChecked(false);
+        QIcon icon3;
+        icon3.addFile(QStringLiteral("Icons/mat.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionShow_MAT->setIcon(icon3);
+        actionShow_Sphere = new QAction(medial_axisClass);
+        actionShow_Sphere->setObjectName(QStringLiteral("actionShow_Sphere"));
+        actionShow_Sphere->setCheckable(true);
+        QIcon icon4;
+        icon4.addFile(QStringLiteral("Icons/sphere.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionShow_Sphere->setIcon(icon4);
+        actionShow_Face = new QAction(medial_axisClass);
+        actionShow_Face->setObjectName(QStringLiteral("actionShow_Face"));
+        actionShow_Face->setCheckable(true);
+        actionOpen_Off_simple = new QAction(medial_axisClass);
+        actionOpen_Off_simple->setObjectName(QStringLiteral("actionOpen_Off_simple"));
+        actionOpen_Off_simple->setIcon(icon);
+        actionShow_Facet_Normal = new QAction(medial_axisClass);
+        actionShow_Facet_Normal->setObjectName(QStringLiteral("actionShow_Facet_Normal"));
+        actionShow_Facet_Normal->setCheckable(true);
+        actionShow_Facet_Normal->setChecked(false);
+        QIcon icon5;
+        icon5.addFile(QStringLiteral("Icons/triangle.png"), QSize(), QIcon::Normal, QIcon::Off);
+        actionShow_Facet_Normal->setIcon(icon5);
+        actionShow_Initial = new QAction(medial_axisClass);
+        actionShow_Initial->setObjectName(QStringLiteral("actionShow_Initial"));
+        actionShow_Initial->setCheckable(true);
+        actionShow_Initial_Edge = new QAction(medial_axisClass);
+        actionShow_Initial_Edge->setObjectName(QStringLiteral("actionShow_Initial_Edge"));
+        actionShow_Initial_Edge->setCheckable(true);
+        actionShow_Initial_Face = new QAction(medial_axisClass);
+        actionShow_Initial_Face->setObjectName(QStringLiteral("actionShow_Initial_Face"));
+        actionShow_Initial_Face->setCheckable(true);
+        actionShow_Initial_Sphere = new QAction(medial_axisClass);
+        actionShow_Initial_Sphere->setObjectName(QStringLiteral("actionShow_Initial_Sphere"));
+        actionShow_Initial_Sphere->setCheckable(true);
+        actionShow_Sphere_Vertex = new QAction(medial_axisClass);
+        actionShow_Sphere_Vertex->setObjectName(QStringLiteral("actionShow_Sphere_Vertex"));
+        actionShow_Sphere_Vertex->setCheckable(true);
+        actionShow_Sphere_Edge = new QAction(medial_axisClass);
+        actionShow_Sphere_Edge->setObjectName(QStringLiteral("actionShow_Sphere_Edge"));
+        actionShow_Sphere_Edge->setCheckable(true);
+        actionShow_Sphere_Mesh_Envelop = new QAction(medial_axisClass);
+        actionShow_Sphere_Mesh_Envelop->setObjectName(QStringLiteral("actionShow_Sphere_Mesh_Envelop"));
+        actionShow_Sphere_Mesh_Envelop->setCheckable(true);
+        actionShow_Sphere_Mesh_Sphere = new QAction(medial_axisClass);
+        actionShow_Sphere_Mesh_Sphere->setObjectName(QStringLiteral("actionShow_Sphere_Mesh_Sphere"));
+        actionShow_Sphere_Mesh_Sphere->setCheckable(true);
+        actionSimplifiy_SM = new QAction(medial_axisClass);
+        actionSimplifiy_SM->setObjectName(QStringLiteral("actionSimplifiy_SM"));
+        actionSimplify_by_50 = new QAction(medial_axisClass);
+        actionSimplify_by_50->setObjectName(QStringLiteral("actionSimplify_by_50"));
+        actionSimplify_by_10 = new QAction(medial_axisClass);
+        actionSimplify_by_10->setObjectName(QStringLiteral("actionSimplify_by_10"));
+        actionOpen_MA = new QAction(medial_axisClass);
+        actionOpen_MA->setObjectName(QStringLiteral("actionOpen_MA"));
+        actionExport_MA = new QAction(medial_axisClass);
+        actionExport_MA->setObjectName(QStringLiteral("actionExport_MA"));
+        actionOpen_Medial_Axis = new QAction(medial_axisClass);
+        actionOpen_Medial_Axis->setObjectName(QStringLiteral("actionOpen_Medial_Axis"));
+        actionExport_Medial_Axis = new QAction(medial_axisClass);
+        actionExport_Medial_Axis->setObjectName(QStringLiteral("actionExport_Medial_Axis"));
+        actionImport_Medial_Axis = new QAction(medial_axisClass);
+        actionImport_Medial_Axis->setObjectName(QStringLiteral("actionImport_Medial_Axis"));
+        actionRemesh_Medial_Axis = new QAction(medial_axisClass);
+        actionRemesh_Medial_Axis->setObjectName(QStringLiteral("actionRemesh_Medial_Axis"));
+        actionCompute_Medial_Axis = new QAction(medial_axisClass);
+        actionCompute_Medial_Axis->setObjectName(QStringLiteral("actionCompute_Medial_Axis"));
+        actionMA_Simplify_One = new QAction(medial_axisClass);
+        actionMA_Simplify_One->setObjectName(QStringLiteral("actionMA_Simplify_One"));
+        actionQEM_Vertex = new QAction(medial_axisClass);
+        actionQEM_Vertex->setObjectName(QStringLiteral("actionQEM_Vertex"));
+        actionQEM_Vertex->setCheckable(true);
+        actionQEM_Edge = new QAction(medial_axisClass);
+        actionQEM_Edge->setObjectName(QStringLiteral("actionQEM_Edge"));
+        actionQEM_Edge->setCheckable(true);
+        actionQEM_Face = new QAction(medial_axisClass);
+        actionQEM_Face->setObjectName(QStringLiteral("actionQEM_Face"));
+        actionQEM_Face->setCheckable(true);
+        actionSimplify_QEM_50 = new QAction(medial_axisClass);
+        actionSimplify_QEM_50->setObjectName(QStringLiteral("actionSimplify_QEM_50"));
+        actionSimplify_QEM = new QAction(medial_axisClass);
+        actionSimplify_QEM->setObjectName(QStringLiteral("actionSimplify_QEM"));
+        actionSimplify_MA = new QAction(medial_axisClass);
+        actionSimplify_MA->setObjectName(QStringLiteral("actionSimplify_MA"));
+        actionSimplify_MA_Fifty = new QAction(medial_axisClass);
+        actionSimplify_MA_Fifty->setObjectName(QStringLiteral("actionSimplify_MA_Fifty"));
+        actionMA_QEM_Vertex = new QAction(medial_axisClass);
+        actionMA_QEM_Vertex->setObjectName(QStringLiteral("actionMA_QEM_Vertex"));
+        actionMA_QEM_Vertex->setCheckable(true);
+        actionMA_QEM_Edge = new QAction(medial_axisClass);
+        actionMA_QEM_Edge->setObjectName(QStringLiteral("actionMA_QEM_Edge"));
+        actionMA_QEM_Edge->setCheckable(true);
+        actionMA_QEM_Envelop = new QAction(medial_axisClass);
+        actionMA_QEM_Envelop->setObjectName(QStringLiteral("actionMA_QEM_Envelop"));
+        actionMA_QEM_Envelop->setCheckable(true);
+        actionMA_QEM_Sphere = new QAction(medial_axisClass);
+        actionMA_QEM_Sphere->setObjectName(QStringLiteral("actionMA_QEM_Sphere"));
+        actionMA_QEM_Sphere->setCheckable(true);
+        actionSimplify_MA_Ten = new QAction(medial_axisClass);
+        actionSimplify_MA_Ten->setObjectName(QStringLiteral("actionSimplify_MA_Ten"));
+        actionShow_Centroid_Point = new QAction(medial_axisClass);
+        actionShow_Centroid_Point->setObjectName(QStringLiteral("actionShow_Centroid_Point"));
+        actionShow_Centroid_Point->setCheckable(true);
+        actionShow_Envelop = new QAction(medial_axisClass);
+        actionShow_Envelop->setObjectName(QStringLiteral("actionShow_Envelop"));
+        actionShow_Envelop->setCheckable(true);
+        actionExport_MA_QEM = new QAction(medial_axisClass);
+        actionExport_MA_QEM->setObjectName(QStringLiteral("actionExport_MA_QEM"));
+        actionShow_Fake_Boundary_Vertex = new QAction(medial_axisClass);
+        actionShow_Fake_Boundary_Vertex->setObjectName(QStringLiteral("actionShow_Fake_Boundary_Vertex"));
+        actionShow_Fake_Boundary_Vertex->setCheckable(true);
+        actionShow_Boundary_Vertex = new QAction(medial_axisClass);
+        actionShow_Boundary_Vertex->setObjectName(QStringLiteral("actionShow_Boundary_Vertex"));
+        actionShow_Boundary_Vertex->setCheckable(false);
+        actionShow_NonManifold_Vertex = new QAction(medial_axisClass);
+        actionShow_NonManifold_Vertex->setObjectName(QStringLiteral("actionShow_NonManifold_Vertex"));
+        actionShow_NonManifold_Vertex->setCheckable(true);
+        actionShow_Saved_Vertex = new QAction(medial_axisClass);
+        actionShow_Saved_Vertex->setObjectName(QStringLiteral("actionShow_Saved_Vertex"));
+        actionShow_Saved_Vertex->setCheckable(true);
+        actionSlab_Vertex = new QAction(medial_axisClass);
+        actionSlab_Vertex->setObjectName(QStringLiteral("actionSlab_Vertex"));
+        actionSlab_Vertex->setCheckable(true);
+        actionSlab_Edge = new QAction(medial_axisClass);
+        actionSlab_Edge->setObjectName(QStringLiteral("actionSlab_Edge"));
+        actionSlab_Edge->setCheckable(true);
+        actionSlab_Envelop = new QAction(medial_axisClass);
+        actionSlab_Envelop->setObjectName(QStringLiteral("actionSlab_Envelop"));
+        actionSlab_Envelop->setCheckable(true);
+        actionSlab_Sphere = new QAction(medial_axisClass);
+        actionSlab_Sphere->setObjectName(QStringLiteral("actionSlab_Sphere"));
+        actionSlab_Sphere->setCheckable(true);
+        actionSimplify_Slab = new QAction(medial_axisClass);
+        actionSimplify_Slab->setObjectName(QStringLiteral("actionSimplify_Slab"));
+        actionShow_stability_ratio = new QAction(medial_axisClass);
+        actionShow_stability_ratio->setObjectName(QStringLiteral("actionShow_stability_ratio"));
+        actionShow_stability_ratio->setCheckable(true);
+        actionInitial_VQEM = new QAction(medial_axisClass);
+        actionInitial_VQEM->setObjectName(QStringLiteral("actionInitial_VQEM"));
+        actionInitial_Slab = new QAction(medial_axisClass);
+        actionInitial_Slab->setObjectName(QStringLiteral("actionInitial_Slab"));
+        actionDetermine_Vertex_Type = new QAction(medial_axisClass);
+        actionDetermine_Vertex_Type->setObjectName(QStringLiteral("actionDetermine_Vertex_Type"));
+        actionInitial_Boundary_Edge = new QAction(medial_axisClass);
+        actionInitial_Boundary_Edge->setObjectName(QStringLiteral("actionInitial_Boundary_Edge"));
+        actionSlab_face = new QAction(medial_axisClass);
+        actionSlab_face->setObjectName(QStringLiteral("actionSlab_face"));
+        actionSlab_face->setCheckable(true);
+        actionShrink_Sphere = new QAction(medial_axisClass);
+        actionShrink_Sphere->setObjectName(QStringLiteral("actionShrink_Sphere"));
+        actionShrink_Sphere->setCheckable(true);
+        actionShrink_Envelop = new QAction(medial_axisClass);
+        actionShrink_Envelop->setObjectName(QStringLiteral("actionShrink_Envelop"));
+        actionShrink_Envelop->setCheckable(true);
+        actionMethodOne = new QAction(medial_axisClass);
+        actionMethodOne->setObjectName(QStringLiteral("actionMethodOne"));
+        actionMethodOne->setCheckable(true);
+        actionMethodTwo = new QAction(medial_axisClass);
+        actionMethodTwo->setObjectName(QStringLiteral("actionMethodTwo"));
+        actionMethodTwo->setCheckable(true);
+        actionMethodThree = new QAction(medial_axisClass);
+        actionMethodThree->setObjectName(QStringLiteral("actionMethodThree"));
+        actionMethodThree->setCheckable(true);
+        actionPreserve_Saved_Vertex = new QAction(medial_axisClass);
+        actionPreserve_Saved_Vertex->setObjectName(QStringLiteral("actionPreserve_Saved_Vertex"));
+        actionPreserve_Saved_Vertex->setCheckable(true);
+        actionInitialize = new QAction(medial_axisClass);
+        actionInitialize->setObjectName(QStringLiteral("actionInitialize"));
+        actionComputer_Hausdorff = new QAction(medial_axisClass);
+        actionComputer_Hausdorff->setObjectName(QStringLiteral("actionComputer_Hausdorff"));
+        actionComputer_Hausdorff->setCheckable(true);
+        actionScale_One = new QAction(medial_axisClass);
+        actionScale_One->setObjectName(QStringLiteral("actionScale_One"));
+        actionScale_One->setCheckable(true);
+        actionScale_Two = new QAction(medial_axisClass);
+        actionScale_Two->setObjectName(QStringLiteral("actionScale_Two"));
+        actionScale_Two->setCheckable(true);
+        action_Other_Scale = new QAction(medial_axisClass);
+        action_Other_Scale->setObjectName(QStringLiteral("action_Other_Scale"));
+        action_Other_Scale->setCheckable(true);
+        actionClear_Error = new QAction(medial_axisClass);
+        actionClear_Error->setObjectName(QStringLiteral("actionClear_Error"));
+        actionClear_Error->setCheckable(true);
+        actionZoom_MA = new QAction(medial_axisClass);
+        actionZoom_MA->setObjectName(QStringLiteral("actionZoom_MA"));
+        actionZoom_MA->setCheckable(true);
+        actionPrevent_Inversion = new QAction(medial_axisClass);
+        actionPrevent_Inversion->setObjectName(QStringLiteral("actionPrevent_Inversion"));
+        actionPrevent_Inversion->setCheckable(true);
+        actionTypeOne = new QAction(medial_axisClass);
+        actionTypeOne->setObjectName(QStringLiteral("actionTypeOne"));
+        actionTypeOne->setCheckable(true);
+        actionTypeTwo = new QAction(medial_axisClass);
+        actionTypeTwo->setObjectName(QStringLiteral("actionTypeTwo"));
+        actionTypeTwo->setCheckable(true);
+        actionSet_k_value = new QAction(medial_axisClass);
+        actionSet_k_value->setObjectName(QStringLiteral("actionSet_k_value"));
+        actionSet_k_value->setCheckable(false);
+        actionPick_Mode = new QAction(medial_axisClass);
+        actionPick_Mode->setObjectName(QStringLiteral("actionPick_Mode"));
+        actionPick_Mode->setCheckable(true);
+        actionSave_EPS = new QAction(medial_axisClass);
+        actionSave_EPS->setObjectName(QStringLiteral("actionSave_EPS"));
+        actionSave_ViewPoint = new QAction(medial_axisClass);
+        actionSave_ViewPoint->setObjectName(QStringLiteral("actionSave_ViewPoint"));
+        actionLoad_ViewPoint = new QAction(medial_axisClass);
+        actionLoad_ViewPoint->setObjectName(QStringLiteral("actionLoad_ViewPoint"));
+        actionReverse_Orientation = new QAction(medial_axisClass);
+        actionReverse_Orientation->setObjectName(QStringLiteral("actionReverse_Orientation"));
+        actionReverse_Orientation->setCheckable(true);
+        actionHeadBar = new QAction(medial_axisClass);
+        actionHeadBar->setObjectName(QStringLiteral("actionHeadBar"));
+        actionHeadBar->setCheckable(true);
+        actionColorBar = new QAction(medial_axisClass);
+        actionColorBar->setObjectName(QStringLiteral("actionColorBar"));
+        actionColorBar->setCheckable(true);
+        actionSmooth_Render = new QAction(medial_axisClass);
+        actionSmooth_Render->setObjectName(QStringLiteral("actionSmooth_Render"));
+        actionSmooth_Render->setCheckable(true);
+        actionFace_Color = new QAction(medial_axisClass);
+        actionFace_Color->setObjectName(QStringLiteral("actionFace_Color"));
+        actionOpen_PointCloud = new QAction(medial_axisClass);
+        actionOpen_PointCloud->setObjectName(QStringLiteral("actionOpen_PointCloud"));
+        actionOpen_PointCloud->setIcon(icon);
+        actionStability_Ratio = new QAction(medial_axisClass);
+        actionStability_Ratio->setObjectName(QStringLiteral("actionStability_Ratio"));
+        actionStability_Ratio->setCheckable(true);
+        centralWidget = new QWidget(medial_axisClass);
+        centralWidget->setObjectName(QStringLiteral("centralWidget"));
+        medial_axisClass->setCentralWidget(centralWidget);
+        menuBar = new QMenuBar(medial_axisClass);
+        menuBar->setObjectName(QStringLiteral("menuBar"));
+        menuBar->setGeometry(QRect(0, 0, 1516, 21));
+        menuFile = new QMenu(menuBar);
+        menuFile->setObjectName(QStringLiteral("menuFile"));
+        menuMesh = new QMenu(menuBar);
+        menuMesh->setObjectName(QStringLiteral("menuMesh"));
+        menuMesh->setContextMenuPolicy(Qt::NoContextMenu);
+        menuSlab = new QMenu(menuBar);
+        menuSlab->setObjectName(QStringLiteral("menuSlab"));
+        menuRender_Option = new QMenu(menuBar);
+        menuRender_Option->setObjectName(QStringLiteral("menuRender_Option"));
+        medial_axisClass->setMenuBar(menuBar);
+        mainToolBar = new QToolBar(medial_axisClass);
+        mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
+        mainToolBar->setToolButtonStyle(Qt::ToolButtonTextUnderIcon);
+        medial_axisClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
+        statusBar = new QStatusBar(medial_axisClass);
+        statusBar->setObjectName(QStringLiteral("statusBar"));
+        medial_axisClass->setStatusBar(statusBar);
+
+        menuBar->addAction(menuFile->menuAction());
+        menuBar->addAction(menuMesh->menuAction());
+        menuBar->addAction(menuSlab->menuAction());
+        menuBar->addAction(menuRender_Option->menuAction());
+        menuFile->addAction(actionOpen_Off_simple);
+        menuFile->addAction(actionExit);
+        menuMesh->addAction(actionShow_Vertex);
+        menuMesh->addAction(actionShow_Edge);
+        menuMesh->addAction(actionShow_Face);
+        menuSlab->addAction(actionSlab_Vertex);
+        menuSlab->addAction(actionSlab_face);
+        menuSlab->addAction(actionSlab_Sphere);
+        menuSlab->addAction(actionSlab_Envelop);
+        menuSlab->addAction(actionStability_Ratio);
+        menuRender_Option->addAction(actionReverse_Orientation);
+        menuRender_Option->addAction(actionSmooth_Render);
+        mainToolBar->addAction(actionOpen_Off_simple);
+        mainToolBar->addAction(actionSimplify_Slab);
+        mainToolBar->addSeparator();
+        mainToolBar->addAction(actionSlab_face);
+        mainToolBar->addAction(actionSlab_Envelop);
+        mainToolBar->addAction(actionSlab_Sphere);
+        mainToolBar->addSeparator();
+        mainToolBar->addAction(actionStability_Ratio);
+        mainToolBar->addAction(actionSet_k_value);
+
+        retranslateUi(medial_axisClass);
+
+        QMetaObject::connectSlotsByName(medial_axisClass);
+    } // setupUi
+
+    void retranslateUi(QMainWindow *medial_axisClass)
+    {
+        medial_axisClass->setWindowTitle(QApplication::translate("medial_axisClass", "medial_axis", Q_NULLPTR));
+        actionOpen_Off->setText(QApplication::translate("medial_axisClass", "Open Off", Q_NULLPTR));
+        actionExit->setText(QApplication::translate("medial_axisClass", "Exit", Q_NULLPTR));
+        actionShow_Vertex->setText(QApplication::translate("medial_axisClass", "Show Vertex", Q_NULLPTR));
+        actionShow_Edge->setText(QApplication::translate("medial_axisClass", "Show Edge", Q_NULLPTR));
+        actionDT->setText(QApplication::translate("medial_axisClass", "Denaulay Triangulation", Q_NULLPTR));
+        actionVoronoi_Diagram->setText(QApplication::translate("medial_axisClass", "Voronoi Diagram", Q_NULLPTR));
+        actionShow_MAT->setText(QApplication::translate("medial_axisClass", "Show MAT", Q_NULLPTR));
+        actionShow_Sphere->setText(QApplication::translate("medial_axisClass", "Show Sphere", Q_NULLPTR));
+        actionShow_Face->setText(QApplication::translate("medial_axisClass", "Show Face", Q_NULLPTR));
+        actionOpen_Off_simple->setText(QApplication::translate("medial_axisClass", "Load Model", Q_NULLPTR));
+        actionShow_Facet_Normal->setText(QApplication::translate("medial_axisClass", "Show Facet Normal", Q_NULLPTR));
+        actionShow_Initial->setText(QApplication::translate("medial_axisClass", "Show Initial", Q_NULLPTR));
+        actionShow_Initial_Edge->setText(QApplication::translate("medial_axisClass", "Show Initial Edge", Q_NULLPTR));
+        actionShow_Initial_Face->setText(QApplication::translate("medial_axisClass", "Show Initial Face", Q_NULLPTR));
+        actionShow_Initial_Sphere->setText(QApplication::translate("medial_axisClass", "Show Initial Sphere", Q_NULLPTR));
+        actionShow_Sphere_Vertex->setText(QApplication::translate("medial_axisClass", "Sphere Vertex", Q_NULLPTR));
+        actionShow_Sphere_Edge->setText(QApplication::translate("medial_axisClass", "Sphere Edge", Q_NULLPTR));
+        actionShow_Sphere_Mesh_Envelop->setText(QApplication::translate("medial_axisClass", "Sphere Mesh Envelop", Q_NULLPTR));
+        actionShow_Sphere_Mesh_Sphere->setText(QApplication::translate("medial_axisClass", "Sphere Mesh Sphere", Q_NULLPTR));
+        actionSimplifiy_SM->setText(QApplication::translate("medial_axisClass", "SM_sim", Q_NULLPTR));
+        actionSimplify_by_50->setText(QApplication::translate("medial_axisClass", "Simplify by 50", Q_NULLPTR));
+        actionSimplify_by_10->setText(QApplication::translate("medial_axisClass", "Simplify by 10", Q_NULLPTR));
+        actionOpen_MA->setText(QApplication::translate("medial_axisClass", "Open MA", Q_NULLPTR));
+        actionExport_MA->setText(QApplication::translate("medial_axisClass", "Export MA", Q_NULLPTR));
+        actionOpen_Medial_Axis->setText(QApplication::translate("medial_axisClass", "Import Medial Axis", Q_NULLPTR));
+        actionExport_Medial_Axis->setText(QApplication::translate("medial_axisClass", "Export Medial Axis", Q_NULLPTR));
+        actionImport_Medial_Axis->setText(QApplication::translate("medial_axisClass", "Import Medial Axis", Q_NULLPTR));
+        actionRemesh_Medial_Axis->setText(QApplication::translate("medial_axisClass", "Remesh Medial Axis", Q_NULLPTR));
+        actionCompute_Medial_Axis->setText(QApplication::translate("medial_axisClass", "Compute Medial Axis", Q_NULLPTR));
+        actionMA_Simplify_One->setText(QApplication::translate("medial_axisClass", "MA Simplify One", Q_NULLPTR));
+        actionQEM_Vertex->setText(QApplication::translate("medial_axisClass", "QEM Vertex", Q_NULLPTR));
+        actionQEM_Edge->setText(QApplication::translate("medial_axisClass", "QEM Edge", Q_NULLPTR));
+        actionQEM_Face->setText(QApplication::translate("medial_axisClass", "QEM Face", Q_NULLPTR));
+        actionSimplify_QEM_50->setText(QApplication::translate("medial_axisClass", "Simplify QEM 50", Q_NULLPTR));
+        actionSimplify_QEM->setText(QApplication::translate("medial_axisClass", "QEM_sim", Q_NULLPTR));
+        actionSimplify_MA->setText(QApplication::translate("medial_axisClass", "MA_sim", Q_NULLPTR));
+        actionSimplify_MA_Fifty->setText(QApplication::translate("medial_axisClass", "Simplify MA Fifty", Q_NULLPTR));
+        actionMA_QEM_Vertex->setText(QApplication::translate("medial_axisClass", "MA QEM Vertex", Q_NULLPTR));
+        actionMA_QEM_Edge->setText(QApplication::translate("medial_axisClass", "MA QEM Edge", Q_NULLPTR));
+        actionMA_QEM_Envelop->setText(QApplication::translate("medial_axisClass", "MA QEM Envelop", Q_NULLPTR));
+        actionMA_QEM_Sphere->setText(QApplication::translate("medial_axisClass", "MA QEM Sphere", Q_NULLPTR));
+        actionSimplify_MA_Ten->setText(QApplication::translate("medial_axisClass", "Simplify MA Ten", Q_NULLPTR));
+        actionShow_Centroid_Point->setText(QApplication::translate("medial_axisClass", "Show Centroid Point", Q_NULLPTR));
+        actionShow_Envelop->setText(QApplication::translate("medial_axisClass", "Show Envelop", Q_NULLPTR));
+        actionExport_MA_QEM->setText(QApplication::translate("medial_axisClass", "Export MA QEM", Q_NULLPTR));
+        actionShow_Fake_Boundary_Vertex->setText(QApplication::translate("medial_axisClass", "Show Fake Boundary Vertex", Q_NULLPTR));
+        actionShow_Boundary_Vertex->setText(QApplication::translate("medial_axisClass", "Show Boundary Vertex", Q_NULLPTR));
+        actionShow_NonManifold_Vertex->setText(QApplication::translate("medial_axisClass", "Show NonManifold Vertex", Q_NULLPTR));
+        actionShow_Saved_Vertex->setText(QApplication::translate("medial_axisClass", "Show Saved Vertex", Q_NULLPTR));
+        actionSlab_Vertex->setText(QApplication::translate("medial_axisClass", "MAT Vertex", Q_NULLPTR));
+        actionSlab_Edge->setText(QApplication::translate("medial_axisClass", "Slab Edge", Q_NULLPTR));
+        actionSlab_Envelop->setText(QApplication::translate("medial_axisClass", "MAT Interpolation", Q_NULLPTR));
+        actionSlab_Sphere->setText(QApplication::translate("medial_axisClass", "MAT Sphere", Q_NULLPTR));
+        actionSimplify_Slab->setText(QApplication::translate("medial_axisClass", "Simplify Medial Mesh", Q_NULLPTR));
+        actionShow_stability_ratio->setText(QApplication::translate("medial_axisClass", "Stability Ratio", Q_NULLPTR));
+        actionInitial_VQEM->setText(QApplication::translate("medial_axisClass", "Initial VQEM", Q_NULLPTR));
+        actionInitial_Slab->setText(QApplication::translate("medial_axisClass", "Initial Slab", Q_NULLPTR));
+        actionDetermine_Vertex_Type->setText(QApplication::translate("medial_axisClass", "Determine Vertex Type", Q_NULLPTR));
+        actionInitial_Boundary_Edge->setText(QApplication::translate("medial_axisClass", "Initial Boundary Edge", Q_NULLPTR));
+        actionSlab_face->setText(QApplication::translate("medial_axisClass", "MAT Face ", Q_NULLPTR));
+        actionShrink_Sphere->setText(QApplication::translate("medial_axisClass", "Shrink Sphere", Q_NULLPTR));
+        actionShrink_Envelop->setText(QApplication::translate("medial_axisClass", "Shrink Envelop", Q_NULLPTR));
+        actionMethodOne->setText(QApplication::translate("medial_axisClass", "MethodOne", Q_NULLPTR));
+        actionMethodTwo->setText(QApplication::translate("medial_axisClass", "MethodTwo", Q_NULLPTR));
+        actionMethodThree->setText(QApplication::translate("medial_axisClass", "MethodThree", Q_NULLPTR));
+        actionPreserve_Saved_Vertex->setText(QApplication::translate("medial_axisClass", "Preserve Saved Vertex", Q_NULLPTR));
+        actionInitialize->setText(QApplication::translate("medial_axisClass", "Initialize", Q_NULLPTR));
+        actionComputer_Hausdorff->setText(QApplication::translate("medial_axisClass", "Computer Hausdorff", Q_NULLPTR));
+        actionScale_One->setText(QApplication::translate("medial_axisClass", "Scale One", Q_NULLPTR));
+        actionScale_Two->setText(QApplication::translate("medial_axisClass", "Scale Two", Q_NULLPTR));
+        action_Other_Scale->setText(QApplication::translate("medial_axisClass", "Other Scale", Q_NULLPTR));
+        actionClear_Error->setText(QApplication::translate("medial_axisClass", "Clear Error", Q_NULLPTR));
+        actionZoom_MA->setText(QApplication::translate("medial_axisClass", "Zoom MA", Q_NULLPTR));
+        actionPrevent_Inversion->setText(QApplication::translate("medial_axisClass", "Prevent Inversion", Q_NULLPTR));
+        actionTypeOne->setText(QApplication::translate("medial_axisClass", "TypeOne", Q_NULLPTR));
+#ifndef QT_NO_WHATSTHIS
+        actionTypeOne->setWhatsThis(QApplication::translate("medial_axisClass", "add hyperbolic weight to the edges", Q_NULLPTR));
+#endif // QT_NO_WHATSTHIS
+        actionTypeTwo->setText(QApplication::translate("medial_axisClass", "TypeTwo", Q_NULLPTR));
+#ifndef QT_NO_WHATSTHIS
+        actionTypeTwo->setWhatsThis(QApplication::translate("medial_axisClass", "add hyperbolic area weight to the faces", Q_NULLPTR));
+#endif // QT_NO_WHATSTHIS
+        actionSet_k_value->setText(QApplication::translate("medial_axisClass", "Set K", Q_NULLPTR));
+#ifndef QT_NO_WHATSTHIS
+        actionSet_k_value->setWhatsThis(QApplication::translate("medial_axisClass", "add ratio of hyperbolic and Euclid to the edges", Q_NULLPTR));
+#endif // QT_NO_WHATSTHIS
+        actionPick_Mode->setText(QApplication::translate("medial_axisClass", "Pick Mode", Q_NULLPTR));
+        actionSave_EPS->setText(QApplication::translate("medial_axisClass", "Save EPS", Q_NULLPTR));
+        actionSave_ViewPoint->setText(QApplication::translate("medial_axisClass", "Save ViewPoint", Q_NULLPTR));
+        actionLoad_ViewPoint->setText(QApplication::translate("medial_axisClass", "Load ViewPoint", Q_NULLPTR));
+        actionReverse_Orientation->setText(QApplication::translate("medial_axisClass", "Reverse Orientation", Q_NULLPTR));
+        actionHeadBar->setText(QApplication::translate("medial_axisClass", "HeadBar", Q_NULLPTR));
+        actionColorBar->setText(QApplication::translate("medial_axisClass", "ColorBar", Q_NULLPTR));
+        actionSmooth_Render->setText(QApplication::translate("medial_axisClass", "Smooth Render", Q_NULLPTR));
+        actionFace_Color->setText(QApplication::translate("medial_axisClass", "Face Color", Q_NULLPTR));
+        actionOpen_PointCloud->setText(QApplication::translate("medial_axisClass", "Open PointCloud", Q_NULLPTR));
+        actionStability_Ratio->setText(QApplication::translate("medial_axisClass", "Stability Ratio", Q_NULLPTR));
+        menuFile->setTitle(QApplication::translate("medial_axisClass", "File", Q_NULLPTR));
+        menuMesh->setTitle(QApplication::translate("medial_axisClass", "Mesh", Q_NULLPTR));
+        menuSlab->setTitle(QApplication::translate("medial_axisClass", "MAT Display", Q_NULLPTR));
+        menuRender_Option->setTitle(QApplication::translate("medial_axisClass", "Render Option", Q_NULLPTR));
+    } // retranslateUi
+
+};
+
+namespace Ui {
+    class medial_axisClass: public Ui_medial_axisClass {};
+} // namespace Ui
+
+QT_END_NAMESPACE
+
+#endif // UI_MEDIAL_AXIS_H

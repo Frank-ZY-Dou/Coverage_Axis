@@ -1,0 +1,755 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>medial_axisClass</class>
+ <widget class="QMainWindow" name="medial_axisClass">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1516</width>
+    <height>598</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>medial_axis</string>
+  </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>Icons/open.png</normaloff>Icons/open.png</iconset>
+  </property>
+  <widget class="QWidget" name="centralWidget"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1516</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen_Off_simple"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuMesh">
+    <property name="contextMenuPolicy">
+     <enum>Qt::NoContextMenu</enum>
+    </property>
+    <property name="title">
+     <string>Mesh</string>
+    </property>
+    <addaction name="actionShow_Vertex"/>
+    <addaction name="actionShow_Edge"/>
+    <addaction name="actionShow_Face"/>
+   </widget>
+   <widget class="QMenu" name="menuSlab">
+    <property name="title">
+     <string>MAT Display</string>
+    </property>
+    <addaction name="actionSlab_Vertex"/>
+    <addaction name="actionSlab_face"/>
+    <addaction name="actionSlab_Sphere"/>
+    <addaction name="actionSlab_Envelop"/>
+    <addaction name="actionStability_Ratio"/>
+   </widget>
+   <widget class="QMenu" name="menuRender_Option">
+    <property name="title">
+     <string>Render Option</string>
+    </property>
+    <addaction name="actionReverse_Orientation"/>
+    <addaction name="actionSmooth_Render"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuMesh"/>
+   <addaction name="menuSlab"/>
+   <addaction name="menuRender_Option"/>
+  </widget>
+  <widget class="QToolBar" name="mainToolBar">
+   <property name="toolButtonStyle">
+    <enum>Qt::ToolButtonTextUnderIcon</enum>
+   </property>
+   <attribute name="toolBarArea">
+    <enum>TopToolBarArea</enum>
+   </attribute>
+   <attribute name="toolBarBreak">
+    <bool>false</bool>
+   </attribute>
+   <addaction name="actionOpen_Off_simple"/>
+   <addaction name="actionSimplify_Slab"/>
+   <addaction name="separator"/>
+   <addaction name="actionSlab_face"/>
+   <addaction name="actionSlab_Envelop"/>
+   <addaction name="actionSlab_Sphere"/>
+   <addaction name="separator"/>
+   <addaction name="actionStability_Ratio"/>
+   <addaction name="actionSet_k_value"/>
+  </widget>
+  <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOpen_Off">
+   <property name="icon">
+    <iconset>
+     <normaloff>Icons/open.png</normaloff>Icons/open.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open Off</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionShow_Vertex">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Vertex</string>
+   </property>
+  </action>
+  <action name="actionShow_Edge">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Edge</string>
+   </property>
+  </action>
+  <action name="actionDT">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>Icons/selected.png</normaloff>Icons/selected.png</iconset>
+   </property>
+   <property name="text">
+    <string>Denaulay Triangulation</string>
+   </property>
+  </action>
+  <action name="actionVoronoi_Diagram">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>Icons/voronoi.png</normaloff>Icons/voronoi.png</iconset>
+   </property>
+   <property name="text">
+    <string>Voronoi Diagram</string>
+   </property>
+  </action>
+  <action name="actionShow_MAT">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>Icons/mat.png</normaloff>Icons/mat.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show MAT</string>
+   </property>
+  </action>
+  <action name="actionShow_Sphere">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>Icons/sphere.png</normaloff>Icons/sphere.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show Sphere</string>
+   </property>
+  </action>
+  <action name="actionShow_Face">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Face</string>
+   </property>
+  </action>
+  <action name="actionOpen_Off_simple">
+   <property name="icon">
+    <iconset>
+     <normaloff>Icons/open.png</normaloff>Icons/open.png</iconset>
+   </property>
+   <property name="text">
+    <string>Load Model</string>
+   </property>
+  </action>
+  <action name="actionShow_Facet_Normal">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>Icons/triangle.png</normaloff>Icons/triangle.png</iconset>
+   </property>
+   <property name="text">
+    <string>Show Facet Normal</string>
+   </property>
+  </action>
+  <action name="actionShow_Initial">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Initial</string>
+   </property>
+  </action>
+  <action name="actionShow_Initial_Edge">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Initial Edge</string>
+   </property>
+  </action>
+  <action name="actionShow_Initial_Face">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Initial Face</string>
+   </property>
+  </action>
+  <action name="actionShow_Initial_Sphere">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Initial Sphere</string>
+   </property>
+  </action>
+  <action name="actionShow_Sphere_Vertex">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Sphere Vertex</string>
+   </property>
+  </action>
+  <action name="actionShow_Sphere_Edge">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Sphere Edge</string>
+   </property>
+  </action>
+  <action name="actionShow_Sphere_Mesh_Envelop">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Sphere Mesh Envelop</string>
+   </property>
+  </action>
+  <action name="actionShow_Sphere_Mesh_Sphere">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Sphere Mesh Sphere</string>
+   </property>
+  </action>
+  <action name="actionSimplifiy_SM">
+   <property name="text">
+    <string>SM_sim</string>
+   </property>
+  </action>
+  <action name="actionSimplify_by_50">
+   <property name="text">
+    <string>Simplify by 50</string>
+   </property>
+  </action>
+  <action name="actionSimplify_by_10">
+   <property name="text">
+    <string>Simplify by 10</string>
+   </property>
+  </action>
+  <action name="actionOpen_MA">
+   <property name="text">
+    <string>Open MA</string>
+   </property>
+  </action>
+  <action name="actionExport_MA">
+   <property name="text">
+    <string>Export MA</string>
+   </property>
+  </action>
+  <action name="actionOpen_Medial_Axis">
+   <property name="text">
+    <string>Import Medial Axis</string>
+   </property>
+  </action>
+  <action name="actionExport_Medial_Axis">
+   <property name="text">
+    <string>Export Medial Axis</string>
+   </property>
+  </action>
+  <action name="actionImport_Medial_Axis">
+   <property name="text">
+    <string>Import Medial Axis</string>
+   </property>
+  </action>
+  <action name="actionRemesh_Medial_Axis">
+   <property name="text">
+    <string>Remesh Medial Axis</string>
+   </property>
+  </action>
+  <action name="actionCompute_Medial_Axis">
+   <property name="text">
+    <string>Compute Medial Axis</string>
+   </property>
+  </action>
+  <action name="actionMA_Simplify_One">
+   <property name="text">
+    <string>MA Simplify One</string>
+   </property>
+  </action>
+  <action name="actionQEM_Vertex">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>QEM Vertex</string>
+   </property>
+  </action>
+  <action name="actionQEM_Edge">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>QEM Edge</string>
+   </property>
+  </action>
+  <action name="actionQEM_Face">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>QEM Face</string>
+   </property>
+  </action>
+  <action name="actionSimplify_QEM_50">
+   <property name="text">
+    <string>Simplify QEM 50</string>
+   </property>
+  </action>
+  <action name="actionSimplify_QEM">
+   <property name="text">
+    <string>QEM_sim</string>
+   </property>
+  </action>
+  <action name="actionSimplify_MA">
+   <property name="text">
+    <string>MA_sim</string>
+   </property>
+  </action>
+  <action name="actionSimplify_MA_Fifty">
+   <property name="text">
+    <string>Simplify MA Fifty</string>
+   </property>
+  </action>
+  <action name="actionMA_QEM_Vertex">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>MA QEM Vertex</string>
+   </property>
+  </action>
+  <action name="actionMA_QEM_Edge">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>MA QEM Edge</string>
+   </property>
+  </action>
+  <action name="actionMA_QEM_Envelop">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>MA QEM Envelop</string>
+   </property>
+  </action>
+  <action name="actionMA_QEM_Sphere">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>MA QEM Sphere</string>
+   </property>
+  </action>
+  <action name="actionSimplify_MA_Ten">
+   <property name="text">
+    <string>Simplify MA Ten</string>
+   </property>
+  </action>
+  <action name="actionShow_Centroid_Point">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Centroid Point</string>
+   </property>
+  </action>
+  <action name="actionShow_Envelop">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Envelop</string>
+   </property>
+  </action>
+  <action name="actionExport_MA_QEM">
+   <property name="text">
+    <string>Export MA QEM</string>
+   </property>
+  </action>
+  <action name="actionShow_Fake_Boundary_Vertex">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Fake Boundary Vertex</string>
+   </property>
+  </action>
+  <action name="actionShow_Boundary_Vertex">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Show Boundary Vertex</string>
+   </property>
+  </action>
+  <action name="actionShow_NonManifold_Vertex">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show NonManifold Vertex</string>
+   </property>
+  </action>
+  <action name="actionShow_Saved_Vertex">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Show Saved Vertex</string>
+   </property>
+  </action>
+  <action name="actionSlab_Vertex">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>MAT Vertex</string>
+   </property>
+  </action>
+  <action name="actionSlab_Edge">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Slab Edge</string>
+   </property>
+  </action>
+  <action name="actionSlab_Envelop">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>MAT Interpolation</string>
+   </property>
+  </action>
+  <action name="actionSlab_Sphere">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>MAT Sphere</string>
+   </property>
+  </action>
+  <action name="actionSimplify_Slab">
+   <property name="text">
+    <string>Simplify Medial Mesh</string>
+   </property>
+  </action>
+  <action name="actionShow_stability_ratio">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Stability Ratio</string>
+   </property>
+  </action>
+  <action name="actionInitial_VQEM">
+   <property name="text">
+    <string>Initial VQEM</string>
+   </property>
+  </action>
+  <action name="actionInitial_Slab">
+   <property name="text">
+    <string>Initial Slab</string>
+   </property>
+  </action>
+  <action name="actionDetermine_Vertex_Type">
+   <property name="text">
+    <string>Determine Vertex Type</string>
+   </property>
+  </action>
+  <action name="actionInitial_Boundary_Edge">
+   <property name="text">
+    <string>Initial Boundary Edge</string>
+   </property>
+  </action>
+  <action name="actionSlab_face">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>MAT Face </string>
+   </property>
+  </action>
+  <action name="actionShrink_Sphere">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Shrink Sphere</string>
+   </property>
+  </action>
+  <action name="actionShrink_Envelop">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Shrink Envelop</string>
+   </property>
+  </action>
+  <action name="actionMethodOne">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>MethodOne</string>
+   </property>
+  </action>
+  <action name="actionMethodTwo">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>MethodTwo</string>
+   </property>
+  </action>
+  <action name="actionMethodThree">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>MethodThree</string>
+   </property>
+  </action>
+  <action name="actionPreserve_Saved_Vertex">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Preserve Saved Vertex</string>
+   </property>
+  </action>
+  <action name="actionInitialize">
+   <property name="text">
+    <string>Initialize</string>
+   </property>
+  </action>
+  <action name="actionComputer_Hausdorff">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Computer Hausdorff</string>
+   </property>
+  </action>
+  <action name="actionScale_One">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Scale One</string>
+   </property>
+  </action>
+  <action name="actionScale_Two">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Scale Two</string>
+   </property>
+  </action>
+  <action name="action_Other_Scale">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Other Scale</string>
+   </property>
+  </action>
+  <action name="actionClear_Error">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Clear Error</string>
+   </property>
+  </action>
+  <action name="actionZoom_MA">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Zoom MA</string>
+   </property>
+  </action>
+  <action name="actionPrevent_Inversion">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Prevent Inversion</string>
+   </property>
+  </action>
+  <action name="actionTypeOne">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>TypeOne</string>
+   </property>
+   <property name="whatsThis">
+    <string>add hyperbolic weight to the edges</string>
+   </property>
+  </action>
+  <action name="actionTypeTwo">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>TypeTwo</string>
+   </property>
+   <property name="whatsThis">
+    <string>add hyperbolic area weight to the faces</string>
+   </property>
+  </action>
+  <action name="actionSet_k_value">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="text">
+    <string>Set K</string>
+   </property>
+   <property name="whatsThis">
+    <string>add ratio of hyperbolic and Euclid to the edges</string>
+   </property>
+  </action>
+  <action name="actionPick_Mode">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Pick Mode</string>
+   </property>
+  </action>
+  <action name="actionSave_EPS">
+   <property name="text">
+    <string>Save EPS</string>
+   </property>
+  </action>
+  <action name="actionSave_ViewPoint">
+   <property name="text">
+    <string>Save ViewPoint</string>
+   </property>
+  </action>
+  <action name="actionLoad_ViewPoint">
+   <property name="text">
+    <string>Load ViewPoint</string>
+   </property>
+  </action>
+  <action name="actionReverse_Orientation">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Reverse Orientation</string>
+   </property>
+  </action>
+  <action name="actionHeadBar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>HeadBar</string>
+   </property>
+  </action>
+  <action name="actionColorBar">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>ColorBar</string>
+   </property>
+  </action>
+  <action name="actionSmooth_Render">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Smooth Render</string>
+   </property>
+  </action>
+  <action name="actionFace_Color">
+   <property name="text">
+    <string>Face Color</string>
+   </property>
+  </action>
+  <action name="actionOpen_PointCloud">
+   <property name="icon">
+    <iconset>
+     <normaloff>Icons/open.png</normaloff>Icons/open.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open PointCloud</string>
+   </property>
+  </action>
+  <action name="actionStability_Ratio">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Stability Ratio</string>
+   </property>
+  </action>
+ </widget>
+ <layoutdefault spacing="6" margin="11"/>
+ <resources>
+  <include location="medial_axis.qrc"/>
+ </resources>
+ <connections/>
+</ui>

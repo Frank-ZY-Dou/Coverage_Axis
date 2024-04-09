@@ -1,0 +1,9 @@
+﻿  medialaxissimplification3d.cpp
+D:\libs\5.9.9\msvc2015_64\include\QtCore/qconfig.h(22): warning C4005: 'QT_LARGEFILE_SUPPORT': macro redefinition
+  D:\libs\5.9.9\msvc2015_64\include\QtCore/qconfig.h(22): note: command-line arguments:  see previous definition of 'QT_LARGEFILE_SUPPORT'
+  Unknown compiler version - please run the configure tests and report the results
+C:\dev\boost_1_56_0\boost/format/alt_sstream_impl.hpp : warning C4819: The file contains a character that cannot be represented in the current code page (936). Save the file in Unicode format to prevent data loss
+C:\Program Files\CGAL-4.8.1\include\CGAL/Mesh_3/global_parameters.h(25): warning C4005: 'BOOST_PARAMETER_MAX_ARITY': macro redefinition
+  C:\dev\boost_1_56_0\boost/parameter/config.hpp(10): note: see previous definition of 'BOOST_PARAMETER_MAX_ARITY'
+  qmat.vcxproj -> F:\Proj_P2S\qmat_x64\x64\Debug\qmat.exe
+  qmat.vcxproj -> F:\Proj_P2S\qmat_x64\x64\Debug\qmat.pdb (Full PDB)

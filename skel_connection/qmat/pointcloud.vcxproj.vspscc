@@ -1,0 +1,17 @@
+﻿""
+{
+"FILE_VERSION" = "9237"
+"ENLISTMENT_CHOICE" = "NEVER"
+"PROJECT_FILE_RELATIVE_PATH" = ""
+"NUMBER_OF_EXCLUDED_FILES" = "7"
+"EXCLUDED_FILE0" = "GeneratedFiles\\Debug\\moc_medialaxissimplification3d.cpp"
+"EXCLUDED_FILE1" = "GeneratedFiles\\Release\\moc_TabDialog.cpp"
+"EXCLUDED_FILE2" = "GeneratedFiles\\Release\\moc_medialaxissimplification3d.cpp"
+"EXCLUDED_FILE3" = "GeneratedFiles\\ui_mctdelme.h"
+"EXCLUDED_FILE4" = "GeneratedFiles\\Debug\\moc_TabDialog.cpp"
+"EXCLUDED_FILE5" = "GeneratedFiles\\Release\\moc_GLWidget.cpp"
+"EXCLUDED_FILE6" = "GeneratedFiles\\Debug\\moc_GLWidget.cpp"
+"ORIGINAL_PROJECT_FILE_PATH" = ""
+"NUMBER_OF_NESTED_PROJECTS" = "0"
+"SOURCE_CONTROL_SETTINGS_PROVIDER" = "PROJECT"
+}

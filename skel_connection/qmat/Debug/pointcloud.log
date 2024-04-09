@@ -1,0 +1,109 @@
+﻿生成启动时间为 2014/11/13 11:13:52。
+     1>项目“E:\pointcloud\pointcloud\pointcloud.vcxproj”在节点 2 上(build 个目标)。
+     1>InitializeBuildStatus:
+         正在创建“Debug\pointcloud.unsuccessfulbuild”，因为已指定“AlwaysCreate”。
+       CustomBuild:
+         所有输出均为最新。
+       ClCompile:
+         D:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\CL.exe /c /I.\GeneratedFiles /ID:\Qt\4.8.5\include /I.\GeneratedFiles\Debug /ID:\Qt\4.8.5\include\QtCore /ID:\Qt\4.8.5\include\QtGui /ID:\Qt\4.8.5\include\QtOpenGL /I.\ /Zi /nologo /W1 /WX- /Od /Oy- /D UNICODE /D WIN32 /D QT_LARGEFILE_SUPPORT /D QT_CORE_LIB /D QT_GUI_LIB /D QT_OPENGL_LIB /D QT_DLL /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t- /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc100.pdb" /Gd /TP /analyze- /errorReport:prompt Mesh.cpp
+         Mesh.cpp
+     1>D:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xutility(2239): warning C4996: 'std::_Copy_impl': Function call with parameters that may be unsafe - this call relies on the caller to check that the passed values are correct. To disable this warning, use -D_SCL_SECURE_NO_WARNINGS. See documentation on how to use Visual C++ 'Checked Iterators'
+                 D:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\include\xutility(2224) : 参见“std::_Copy_impl”的声明
+                 D:\Program Files\CGAL-4.2\include\CGAL/Kd_tree_rectangle.h(120): 参见对正在编译的函数 模板 实例化“_OutIt std::copy<double*,double*>(_InIt,_InIt,_OutIt)”的引用
+                 with
+                 [
+                     _OutIt=double *,
+                     _InIt=double *
+                 ]
+                 D:\Program Files\CGAL-4.2\include\CGAL/Kd_tree_rectangle.h(116): 编译类 模板 成员函数“CGAL::Kd_tree_rectangle<FT_>::Kd_tree_rectangle(const CGAL::Kd_tree_rectangle<FT_> &)”时
+                 with
+                 [
+                     FT_=double
+                 ]
+                 D:\Program Files\CGAL-4.2\include\CGAL/Kd_tree.h(288): 参见对正在编译的类 模板 实例化“CGAL::Kd_tree_rectangle<FT_>”的引用
+                 with
+                 [
+                     FT_=double
+                 ]
+                 D:\Program Files\CGAL-4.2\include\CGAL/Kd_tree.h(286): 编译类 模板 成员函数“CGAL::Kd_tree<SearchTraits,Splitter_,UseExtendedNode>::~Kd_tree(void)”时
+                 with
+                 [
+                     SearchTraits=CGAL::Search_traits_3<CGAL::Add_decorated_point<CGAL::AABB_traits<CGAL::Mesh_3::Robust_intersection_traits_3<K>,CGAL::Mesh_3::Triangle_accessor_primitive<CGAL::Triangle_accessor_3<Polyhedron,K>,CGAL::Mesh_3::Robust_intersection_traits_3<K>>>,CGAL::internal::In_place_list_const_iterator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>,std::allocator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>>>>>,
+                     Splitter_=CGAL::Sliding_midpoint<CGAL::Search_traits_3<CGAL::Add_decorated_point<CGAL::AABB_traits<CGAL::Mesh_3::Robust_intersection_traits_3<K>,CGAL::Mesh_3::Triangle_accessor_primitive<CGAL::Triangle_accessor_3<Polyhedron,K>,CGAL::Mesh_3::Robust_intersection_traits_3<K>>>,CGAL::internal::In_place_list_const_iterator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>,std::allocator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>>>>>>,
+                     UseExtendedNode=CGAL::Tag_true
+                 ]
+                 D:\Program Files\CGAL-4.2\include\CGAL/internal/K_neighbor_search.h(51): 参见对正在编译的类 模板 实例化“CGAL::Kd_tree<SearchTraits,Splitter_,UseExtendedNode>”的引用
+                 with
+                 [
+                     SearchTraits=CGAL::Search_traits_3<CGAL::Add_decorated_point<CGAL::AABB_traits<CGAL::Mesh_3::Robust_intersection_traits_3<K>,CGAL::Mesh_3::Triangle_accessor_primitive<CGAL::Triangle_accessor_3<Polyhedron,K>,CGAL::Mesh_3::Robust_intersection_traits_3<K>>>,CGAL::internal::In_place_list_const_iterator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>,std::allocator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>>>>>,
+                     Splitter_=CGAL::Sliding_midpoint<CGAL::Search_traits_3<CGAL::Add_decorated_point<CGAL::AABB_traits<CGAL::Mesh_3::Robust_intersection_traits_3<K>,CGAL::Mesh_3::Triangle_accessor_primitive<CGAL::Triangle_accessor_3<Polyhedron,K>,CGAL::Mesh_3::Robust_intersection_traits_3<K>>>,CGAL::internal::In_place_list_const_iterator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>,std::allocator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>>>>>>,
+                     UseExtendedNode=CGAL::Tag_true
+                 ]
+                 D:\Program Files\CGAL-4.2\include\CGAL/Orthogonal_k_neighbor_search.h(32): 参见对正在编译的类 模板 实例化“CGAL::internal::K_neighbor_search<SearchTraits,Distance_,Splitter_,Tree_>”的引用
+                 with
+                 [
+                     SearchTraits=CGAL::Search_traits_3<CGAL::Add_decorated_point<CGAL::AABB_traits<CGAL::Mesh_3::Robust_intersection_traits_3<K>,CGAL::Mesh_3::Triangle_accessor_primitive<CGAL::Triangle_accessor_3<Polyhedron,K>,CGAL::Mesh_3::Robust_intersection_traits_3<K>>>,CGAL::internal::In_place_list_const_iterator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>,std::allocator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>>>>>,
+                     Distance_=CGAL::Euclidean_distance<CGAL::Search_traits_3<CGAL::Add_decorated_point<CGAL::AABB_traits<CGAL::Mesh_3::Robust_intersection_traits_3<K>,CGAL::Mesh_3::Triangle_accessor_primitive<CGAL::Triangle_accessor_3<Polyhedron,K>,CGAL::Mesh_3::Robust_intersection_traits_3<K>>>,CGAL::internal::In_place_list_const_iterator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>,std::allocator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>>>>>>,
+                     Splitter_=CGAL::Sliding_midpoint<CGAL::Search_traits_3<CGAL::Add_decorated_point<CGAL::AABB_traits<CGAL::Mesh_3::Robust_intersection_traits_3<K>,CGAL::Mesh_3::Triangle_accessor_primitive<CGAL::Triangle_accessor_3<Polyhedron,K>,CGAL::Mesh_3::Robust_intersection_traits_3<K>>>,CGAL::internal::In_place_list_const_iterator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>,std::allocator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>>>>>>,
+                     Tree_=CGAL::Kd_tree<CGAL::Search_traits_3<CGAL::Add_decorated_point<CGAL::AABB_traits<CGAL::Mesh_3::Robust_intersection_traits_3<K>,CGAL::Mesh_3::Triangle_accessor_primitive<CGAL::Triangle_accessor_3<Polyhedron,K>,CGAL::Mesh_3::Robust_intersection_traits_3<K>>>,CGAL::internal::In_place_list_const_iterator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>,std::allocator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>>>>>,CGAL::Sliding_midpoint<CGAL::Search_traits_3<CGAL::Add_decorated_point<CGAL::AABB_traits<CGAL::Mesh_3::Robust_intersection_traits_3<K>,CGAL::Mesh_3::Triangle_accessor_primitive<CGAL::Triangle_accessor_3<Polyhedron,K>,CGAL::Mesh_3::Robust_intersection_traits_3<K>>>,CGAL::internal::In_place_list_const_iterator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>,std::allocator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>>>>>>,CGAL::Tag_true>
+                 ]
+                 D:\Program Files\CGAL-4.2\include\CGAL/internal/AABB_tree/AABB_search_tree.h(88): 参见对正在编译的类 模板 实例化“CGAL::Orthogonal_k_neighbor_search<SearchTraits>”的引用
+                 with
+                 [
+                     SearchTraits=CGAL::Search_traits_3<CGAL::Add_decorated_point<CGAL::AABB_traits<CGAL::Mesh_3::Robust_intersection_traits_3<K>,CGAL::Mesh_3::Triangle_accessor_primitive<CGAL::Triangle_accessor_3<Polyhedron,K>,CGAL::Mesh_3::Robust_intersection_traits_3<K>>>,CGAL::internal::In_place_list_const_iterator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>,std::allocator<CGAL::HalfedgeDS_in_place_list_face<CGAL::I_Polyhedron_facet<CGAL::HalfedgeDS_face_base<CGAL::HalfedgeDS_list_types<CGAL::Epick,CGAL::I_Polyhedron_derived_items_3<CGAL::Polyhedron_items_3>,std::allocator<int>>,CGAL::Tag_true,CGAL::Plane_3<CGAL::Epick>>>>>>>>
+                 ]
+                 D:\Program Files\CGAL-4.2\include\CGAL/AABB_tree.h(397): 参见对正在编译的类 模板 实例化“CGAL::AABB_search_tree<Traits>”的引用
+                 with
+                 [
+                     Traits=CGAL::AABB_traits<CGAL::Mesh_3::Robust_intersection_traits_3<K>,CGAL::Mesh_3::Triangle_accessor_primitive<CGAL::Triangle_accessor_3<Polyhedron,K>,CGAL::Mesh_3::Robust_intersection_traits_3<K>>>
+                 ]
+                 D:\Program Files\CGAL-4.2\include\CGAL/AABB_tree.h(396): 编译类 模板 成员函数“void CGAL::AABB_tree<AABBTraits>::clear_search_tree(void) const”时
+                 with
+                 [
+                     AABBTraits=CGAL::AABB_traits<CGAL::Mesh_3::Robust_intersection_traits_3<K>,CGAL::Mesh_3::Triangle_accessor_primitive<CGAL::Triangle_accessor_3<Polyhedron,K>,CGAL::Mesh_3::Robust_intersection_traits_3<K>>>
+                 ]
+                 D:\Program Files\CGAL-4.2\include\CGAL/Polyhedral_mesh_domain_3.h(187): 参见对正在编译的类 模板 实例化“CGAL::AABB_tree<AABBTraits>”的引用
+                 with
+                 [
+                     AABBTraits=CGAL::AABB_traits<CGAL::Mesh_3::Robust_intersection_traits_3<K>,CGAL::Mesh_3::Triangle_accessor_primitive<CGAL::Triangle_accessor_3<Polyhedron,K>,CGAL::Mesh_3::Robust_intersection_traits_3<K>>>
+                 ]
+                 e:\pointcloud\pointcloud\Mesh.h(315): 参见对正在编译的类 模板 实例化“CGAL::Polyhedral_mesh_domain_3<Polyhedron,IGT_>”的引用
+                 with
+                 [
+                     Polyhedron=Polyhedron,
+                     IGT_=K
+                 ]
+         所有输出均为最新。
+       Link:
+         D:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\pointcloud\\pointcloud.exe" /NOLOGO /LIBPATH:D:\Qt\4.8.5\lib qtmaind.lib QtCored4.lib QtGuid4.lib QtOpenGLd4.lib opengl32.lib glu32.lib "libgmp-10.lib" "libmpfr-4.lib" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"Debug\pointcloud.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"E:\pointcloud\pointcloud.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\pointcloud\pointcloud.lib" /MACHINE:X86 Debug\ColorRamp.obj
+         Debug\cvt.obj
+         Debug\moc_GLWidget.obj
+         Debug\moc_medialaxissimplification3d.obj
+         Debug\qrc_medial_axis.obj
+         Debug\GeometryObjects.obj
+         Debug\GLWidget.obj
+         Debug\Wm4Math.obj
+         Debug\Wm4Matrix.obj
+         Debug\Wm4Vector.obj
+         Debug\main.obj
+         Debug\medialaxissimplification3d.obj
+         Debug\Mesh.obj
+         Debug\nonmanifoldmesh.obj
+         Debug\PrimMesh.obj
+         Debug\PsRender.obj
+         Debug\SlabMesh.obj
+         Debug\spheremesh.obj
+         Debug\ThreeDimensionalShape.obj
+         Debug\VQEMMesh.obj
+         LINK : 没有找到 E:\pointcloud\\pointcloud.exe 或上一个增量链接没有生成它；正在执行完全链接
+         pointcloud.vcxproj -> E:\pointcloud\pointcloud.exe
+       Manifest:
+         C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\bin\mt.exe /nologo /verbose /outputresource:"E:\pointcloud\\pointcloud.exe;#1" /manifest Debug\pointcloud.exe.intermediate.manifest
+       FinalizeBuildStatus:
+         正在删除文件“Debug\pointcloud.unsuccessfulbuild”。
+         正在对“Debug\pointcloud.lastbuildstate”执行 Touch 任务。
+     1>已完成生成项目“E:\pointcloud\pointcloud\pointcloud.vcxproj”(build 个目标)的操作。
+
+生成成功。
+
+已用时间 00:00:21.36
