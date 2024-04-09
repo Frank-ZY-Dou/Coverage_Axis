@@ -20,7 +20,7 @@ In this paper, we present a simple yet effective formulation called Coverage Axi
 
 - We provide Coverage Axis computation for both mesh and point cloud inputs;  The point cloud can be **unoriented** -> check out our latest SIGGRAPH work [here](https://xrvitd.github.io/Projects/GCNO/index.html).
 - Operations are accelerated by GPU, e.g., computation of coverage matrix and winding number for a mesh.
-- We provide codes for building connectivity in [skel_connection](skel_connection): [README.md](skel_connection%2FREADME.md)
+- We provide codes for building connectivity in [skel_connection](skel_connection): [README.md](skel_connection%2Freadme.md)
 
 # Requirements
 ## System requirements
