@@ -7,8 +7,9 @@
   - **[New!] Coverage Axis++: Efficient Inner Point Selection for 3D Shape Skeletonization: https://arxiv.org/abs/2401.12946** 
   - Code to be release.
 
-# Research Works
-🌟**[Coverage Axis: Inner Point Selection for 3D Shape Skeletonization
+Some geometry tools for MAT and related topics: [Geometry_Tools](https://github.com/Frank-ZY-Dou/Geometry_Tools).
+
+🐱 **[Coverage Axis: Inner Point Selection for 3D Shape Skeletonization
 ](https://arxiv.org/abs/2110.00965), Eurographics 2022**.
 
 Authors: [Zhiyang Dou](https://frank-zy-dou.github.io/), 
@@ -24,7 +25,7 @@ Authors: [Zhiyang Dou](https://frank-zy-dou.github.io/),
 ![teasar](./assets/fig_teaser.jpg)
 In this paper, we present a simple yet effective formulation called Coverage Axis for 3D shape skeletonization. Inspired by the set cover problem, our key idea is to cover all the surface points using as few inside medial balls as possible. This formulation inherently induces a compact and expressive approximation of the Medial Axis Transform (MAT) of a given shape. Different from previous methods that rely on local approximation error, our method allows a global consideration of the overall shape structure, leading to an efficient high-level abstraction and superior robustness to noise. Another appealing aspect of our method is its capability to handle more generalized input such as point clouds and poor-quality meshes. Extensive comparisons and evaluations demonstrate the remarkable effectiveness of our method for generating compact and expressive skeletal representation to approximate the MAT.
 
-🌟 **[Coverage Axis++: Efficient Inner Point Selection for 3D Shape Skeletonization
+🐱 **[Coverage Axis++: Efficient Inner Point Selection for 3D Shape Skeletonization
 ](https://arxiv.org/abs/2401.12946), Arxiv 2023**.
 
 
