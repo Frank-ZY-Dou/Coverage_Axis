@@ -1,8 +1,15 @@
 # Introduction
-Official code for the paper **[Coverage Axis: Inner Point Selection for 3D Shape Skeletonization
+- 🌟Coverage Axis.
+  - We provide Coverage Axis computation for both mesh and point cloud inputs;  The point cloud can be **unoriented** -> check out our latest SIGGRAPH work [here](https://xrvitd.github.io/Projects/GCNO/index.html).
+  - Operations are accelerated by GPU, e.g., computation of coverage matrix and winding number for a mesh.
+  - We provide codes for building connectivity in [skel_connection](skel_connection): [README.md](skel_connection%2Freadme.md).
+- 🌟Coverage Axis++.
+  - **[New!] Coverage Axis++: Efficient Inner Point Selection for 3D Shape Skeletonization: https://arxiv.org/abs/2401.12946** 
+  - Code to be release.
+
+# Research Works
+🌟**[Coverage Axis: Inner Point Selection for 3D Shape Skeletonization
 ](https://arxiv.org/abs/2110.00965), Eurographics 2022**.
-
-
 
 Authors: [Zhiyang Dou](https://frank-zy-dou.github.io/), 
 [Cheng Lin](https://clinplayer.github.io/), 
@@ -17,14 +24,26 @@ Authors: [Zhiyang Dou](https://frank-zy-dou.github.io/),
 ![teasar](./assets/fig_teaser.jpg)
 In this paper, we present a simple yet effective formulation called Coverage Axis for 3D shape skeletonization. Inspired by the set cover problem, our key idea is to cover all the surface points using as few inside medial balls as possible. This formulation inherently induces a compact and expressive approximation of the Medial Axis Transform (MAT) of a given shape. Different from previous methods that rely on local approximation error, our method allows a global consideration of the overall shape structure, leading to an efficient high-level abstraction and superior robustness to noise. Another appealing aspect of our method is its capability to handle more generalized input such as point clouds and poor-quality meshes. Extensive comparisons and evaluations demonstrate the remarkable effectiveness of our method for generating compact and expressive skeletal representation to approximate the MAT.
 
-# Key Features
-- Coverage Axis.
-  - We provide Coverage Axis computation for both mesh and point cloud inputs;  The point cloud can be **unoriented** -> check out our latest SIGGRAPH work [here](https://xrvitd.github.io/Projects/GCNO/index.html).
-  - Operations are accelerated by GPU, e.g., computation of coverage matrix and winding number for a mesh.
-  - We provide codes for building connectivity in [skel_connection](skel_connection): [README.md](skel_connection%2Freadme.md).
-- Coverage Axis++.
-  - **[New!] Coverage Axis++: Efficient Inner Point Selection for 3D Shape Skeletonization: https://arxiv.org/abs/2401.12946** 
-  - Code to be release. 
+🌟 **[Coverage Axis++: Efficient Inner Point Selection for 3D Shape Skeletonization
+](https://arxiv.org/abs/2401.12946), Arxiv 2023**.
+
+
+![teasar](./assets/fig_teaser_cat++.png)
+We introduce Coverage Axis++, a novel and efficient approach to 3D shape skeletonization. The current state-of-the-art approaches for this task often rely on the watertightness of the input or suffer from substantial computational costs, thereby limiting their practicality. To address this challenge, Coverage Axis++ proposes a heuristic algorithm to select skeletal points, offering a high-accuracy approximation of the Medial Axis Transform (MAT) while significantly mitigating computational intensity for various shape representations. We introduce a simple yet effective strategy that considers both shape coverage and uniformity to derive skeletal points. The selection procedure enforces consistency with the shape structure while favoring the dominant medial balls, which thus introduces a compact underlying shape representation in terms of MAT. As a result, Coverage Axis++ allows for skeletonization for various shape representations (e.g., water-tight meshes, triangle soups, point clouds), specification of the number of skeletal points, few hyperparameters, and highly efficient computation with improved reconstruction accuracy. Extensive experiments across a wide range of 3D shapes validate the efficiency and effectiveness of Coverage Axis++. 
+
+Authors: Zimeng Wang*, 
+[Zhiyang Dou*](https://clinplayer.github.io/),
+[Rui Xu](https://xrvitd.github.io/index.html),
+[Cheng Lin](https://clinplayer.github.io/), 
+[Yuan Liu](https://liuyuan-pal.github.io/), 
+[Xiaoxiao Long](https://www.xxlong.site/), 
+[Shiqing Xin](http://irc.cs.sdu.edu.cn/~shiqing/index.html), 
+[Lingjie Liu](https://lingjie0206.github.io/), 
+[Taku Komura](https://www.cs.hku.hk/index.php/people/academic-staff/taku), 
+[Xiaoming Yuan](https://hkumath.hku.hk/~xmyuan/),
+[Wenping Wang](https://engineering.tamu.edu/cse/profiles/Wang-Wenping.html).
+
+
 # Requirements
 ## System requirements
 - Linux Ubuntu 20.04
