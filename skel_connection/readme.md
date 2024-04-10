@@ -22,17 +22,13 @@ Code: download it [here](https://www.dropbox.com/scl/fi/9y118l23ci6tnm4aocq3k/PC
 Usage: In main.cpp, configure the file path.
 ![fig_intro_pc.png](asset%2Ffig_intro_pc.png)
 
-Note in paper, we suggest "r′ can be adjusted accordingly during the
+Note in paper, we suggest that "r′ can be adjusted accordingly during the
 computation of RT to achieve flexible control over the connection".
 
 
 # More Information
 
-Please note that the code is released as is.
-
-If you create a more user-friendly version, please submit a pull request.
-
-
+Please note that the code is provided as-is. If you develop a more user-friendly version, we encourage you to submit a pull request.
 
 
 
