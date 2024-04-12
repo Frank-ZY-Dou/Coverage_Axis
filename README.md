@@ -1,6 +1,7 @@
 # Introduction
 - 🌟Coverage Axis.
-  - We provide Coverage Axis computation for both mesh and point cloud inputs;  The point cloud can be **unoriented** -> check out our latest SIGGRAPH work [here](https://xrvitd.github.io/Projects/GCNO/index.html).
+  - We provide Coverage Axis computation for both mesh and point cloud inputs. 
+    - The point cloud can be **unoriented** -> check out our latest SIGGRAPH work [here](https://xrvitd.github.io/Projects/GCNO/index.html).
   - Operations are accelerated by GPU, e.g., computation of coverage matrix and winding number for a mesh.
   - We provide codes for building connectivity in [skel_connection](skel_connection): [README.md](skel_connection%2Freadme.md).
 - 🌟Coverage Axis++.
@@ -28,10 +29,6 @@ In this paper, we present a simple yet effective formulation called Coverage Axi
 🐱 **[Coverage Axis++: Efficient Inner Point Selection for 3D Shape Skeletonization
 ](https://arxiv.org/abs/2401.12946), Arxiv 2023**.
 
-
-![teasar](./assets/fig_teaser_cat++.png)
-We introduce Coverage Axis++, a novel and efficient approach to 3D shape skeletonization. The current state-of-the-art approaches for this task often rely on the watertightness of the input or suffer from substantial computational costs, thereby limiting their practicality. To address this challenge, Coverage Axis++ proposes a heuristic algorithm to select skeletal points, offering a high-accuracy approximation of the Medial Axis Transform (MAT) while significantly mitigating computational intensity for various shape representations. We introduce a simple yet effective strategy that considers both shape coverage and uniformity to derive skeletal points. The selection procedure enforces consistency with the shape structure while favoring the dominant medial balls, which thus introduces a compact underlying shape representation in terms of MAT. As a result, Coverage Axis++ allows for skeletonization for various shape representations (e.g., water-tight meshes, triangle soups, point clouds), specification of the number of skeletal points, few hyperparameters, and highly efficient computation with improved reconstruction accuracy. Extensive experiments across a wide range of 3D shapes validate the efficiency and effectiveness of Coverage Axis++. 
-
 Authors: Zimeng Wang*, 
 [Zhiyang Dou*](https://clinplayer.github.io/),
 [Rui Xu](https://xrvitd.github.io/index.html),
@@ -43,6 +40,14 @@ Authors: Zimeng Wang*,
 [Taku Komura](https://www.cs.hku.hk/index.php/people/academic-staff/taku), 
 [Xiaoming Yuan](https://hkumath.hku.hk/~xmyuan/),
 [Wenping Wang](https://engineering.tamu.edu/cse/profiles/Wang-Wenping.html).
+
+[[Project Page](https://frank-zy-dou.github.io/projects/CoverageAxis++/index.html)][[Paper](https://arxiv.org/pdf/2401.12946.pdf)][[Code](https://github.com/Frank-ZY-Dou/Coverage_Axis)]
+
+
+![teasar](./assets/fig_teaser_cat++.png)
+We introduce Coverage Axis++, a novel and efficient approach to 3D shape skeletonization. The current state-of-the-art approaches for this task often rely on the watertightness of the input or suffer from substantial computational costs, thereby limiting their practicality. To address this challenge, Coverage Axis++ proposes a heuristic algorithm to select skeletal points, offering a high-accuracy approximation of the Medial Axis Transform (MAT) while significantly mitigating computational intensity for various shape representations. We introduce a simple yet effective strategy that considers both shape coverage and uniformity to derive skeletal points. The selection procedure enforces consistency with the shape structure while favoring the dominant medial balls, which thus introduces a compact underlying shape representation in terms of MAT. As a result, Coverage Axis++ allows for skeletonization for various shape representations (e.g., water-tight meshes, triangle soups, point clouds), specification of the number of skeletal points, few hyperparameters, and highly efficient computation with improved reconstruction accuracy. Extensive experiments across a wide range of 3D shapes validate the efficiency and effectiveness of Coverage Axis++. 
+
+
 
 
 # Requirements
