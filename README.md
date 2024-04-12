@@ -6,7 +6,7 @@
   - We provide codes for building connectivity in [skel_connection](skel_connection): [README.md](skel_connection%2Freadme.md).
 - 🌟Coverage Axis++.
   - **[New!] Coverage Axis++: Efficient Inner Point Selection for 3D Shape Skeletonization: https://arxiv.org/abs/2401.12946** 
-  - Code to be release.
+  - Code to be released.
 
 Some geometry tools for MAT and related topics: [Geometry_Tools](https://github.com/Frank-ZY-Dou/Geometry_Tools).
 
