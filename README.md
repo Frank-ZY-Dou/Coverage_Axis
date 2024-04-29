@@ -197,6 +197,7 @@ disp(fval);
 
 
 # Citation
+
 ```angular2html
 @inproceedings{dou2022coverage,
   title={Coverage Axis: Inner Point Selection for 3D Shape Skeletonization},
@@ -207,6 +208,15 @@ disp(fval);
   pages={419--432},
   year={2022},
   organization={Wiley Online Library}
+}
+```
+
+```angular2html
+@article{wang2024coverage,
+  title={Coverage Axis++: Efficient Inner Point Selection for 3D Shape Skeletonization},
+  author={Wang, Zimeng and Dou, Zhiyang and Xu, Rui and Lin, Cheng and Liu, Yuan and Long, Xiaoxiao and Xin, Shiqing and Liu, Lingjie and Komura, Taku and Yuan, Xiaoming and others},
+  journal={arXiv preprint arXiv:2401.12946},
+  year={2024}
 }
 ```
 
