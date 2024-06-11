@@ -1,4 +1,5 @@
 import trimesh
+
 def read_VD(path):
     points = []
     radius = []

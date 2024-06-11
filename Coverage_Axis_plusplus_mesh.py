@@ -1,11 +1,11 @@
 # Author: Zimeng Wang*  Zhiyang Dou*
+
 import os
 import torch
 import trimesh
 import numpy as np
 from tqdm import tqdm
 from utils import save_obj, save_txt, read_VD, winding_number
-
 
 def heuristic_alg(D, candidate, radius_list, reg_radius=1, reg=1, max_iter=1000, penalty='stand'):
     m, n = D.shape
