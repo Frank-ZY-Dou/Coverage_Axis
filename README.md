@@ -29,7 +29,7 @@ In this paper, we present a simple yet effective formulation called Coverage Axi
 ](https://arxiv.org/abs/2401.12946), SGP 2024**.
 
 Authors: Zimeng Wang*, 
-[Zhiyang Dou*](https://clinplayer.github.io/),
+[Zhiyang Dou*](https://frank-zy-dou.github.io/),
 [Rui Xu](https://xrvitd.github.io/index.html),
 [Cheng Lin](https://clinplayer.github.io/), 
 [Yuan Liu](https://liuyuan-pal.github.io/), 
