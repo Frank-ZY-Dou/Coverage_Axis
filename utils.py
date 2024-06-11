@@ -32,6 +32,20 @@ def save_obj(path, verts, faces=None):
                 f.write('f %d %d %d\n' % (ff[0] + 1, ff[1] + 1, ff[2] + 1))
 
 
+
+def save_txt(path, verts, faces=None):
+    verts = verts.tolist()
+
+    with open(path, 'w') as f:
+        for v in verts:
+            f.write('v %f %f %f %f\n' %(v[0], v[1], v[2], v[3]))
+        if faces is not None:
+            faces = faces.tolist()
+            for ff in faces:
+                f.write('f %d %d %d\n' % (ff[0] + 1, ff[1] + 1, ff[2] + 1))
+
+
+
 # Codes borrowed from https://gist.github.com/dendenxu/ee5008acb5607195582e7983a384e644#file-moller_trumbore-py-L27
 import torch
 
