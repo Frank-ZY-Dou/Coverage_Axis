@@ -77,10 +77,15 @@ dilation = 0.02
 inner_points = "random"
 max_time_SCP = 100 # in second
 ```
-Run
+For Coverage Axis, Run
 ```angular2html
 python Coverage_Axis_mesh.py
 ```
+For Coverage Axis++, Run
+```angular2html
+python Coverage_Axis_plusplus_mesh.py
+```
+
 The outputs are placed in the folder `output`.
 - `mesh_inner_points.obj` contains the candidate inner points.
 - `mesh.obj` contains the input mesh.
@@ -97,10 +102,16 @@ The outputs are placed in the folder `output`.
 
 You may use randomly generated points inside the volume as inner candidate points by setting `inner_points = "random"
 `. Notably, we already generate a sample. If you choose to produce candidates by randomly sampling inside the shape, it can be a little time consuming.
-Then run
+
+For Coverage Axis, run
 ```angular2html
 python Coverage_Axis_mesh.py
 ```
+For Coverage Axis++, run
+```angular2html
+python Coverage_Axis_plusplus_pc.py
+```
+
 
 ## Point Cloud Input
 
