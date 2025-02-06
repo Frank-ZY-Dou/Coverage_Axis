@@ -188,7 +188,7 @@ This is our case. Please remember to put the [01Ants-12_mesh_ori_pc.obj](input/0
 ./807_FastWindingNumber_CA ./01Ants-12_mesh_ori_pc.obj  ./01Ants-12_mesh_inner_points.obj
 ```
 Visulization:
-Press "1" twice to toggle between viewing the polygon soup and the point cloud.
+Press "1" to view the point cloud.
 <p align="center">
 <img src="./assets/fig_wnf_t2_1.png" 
         alt="Picture" 
