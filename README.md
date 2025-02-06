@@ -13,8 +13,8 @@ Some geometry tools for MAT and related topics: [Geometry_Tools](https://github.
 ](https://arxiv.org/abs/2110.00965), Eurographics 2022**.
 
 ```diff
-+ Top Cited Article in Computer Graphics Forum (CGF) 2022-2023.</span>
-
++ Top Cited Article in Computer Graphics Forum (CGF) 2022-2023.
+```
 
 
 Authors: [Zhiyang Dou](https://frank-zy-dou.github.io/), 
