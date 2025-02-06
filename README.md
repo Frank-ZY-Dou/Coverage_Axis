@@ -11,9 +11,9 @@ Some geometry tools for MAT and related topics: [Geometry_Tools](https://github.
 
 🐱 **[Coverage Axis: Inner Point Selection for 3D Shape Skeletonization
 ](https://arxiv.org/abs/2110.00965), Eurographics 2022**.
-
+<p>
 <span style="color: rgb(250,100, 100); font-weight: bold;">Top Cited Article in Computer Graphics Forum (CGF) 2022-2023.</span>
-
+</p>
 
 
 Authors: [Zhiyang Dou](https://frank-zy-dou.github.io/), 
