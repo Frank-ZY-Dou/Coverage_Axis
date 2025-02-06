@@ -12,6 +12,10 @@ Some geometry tools for MAT and related topics: [Geometry_Tools](https://github.
 🐱 **[Coverage Axis: Inner Point Selection for 3D Shape Skeletonization
 ](https://arxiv.org/abs/2110.00965), Eurographics 2022**.
 
+<span style="color: rgb(250,100, 100); font-weight: bold;">Top Cited Article in Computer Graphics Forum (CGF) 2022-2023.</span>
+
+
+
 Authors: [Zhiyang Dou](https://frank-zy-dou.github.io/), 
 [Cheng Lin](https://clinplayer.github.io/), 
 [Rui Xu](https://xrvitd.github.io/index.html), 
@@ -114,8 +118,15 @@ python Coverage_Axis_plusplus_pc.py
 
 
 ## Point Cloud Input
+I will give more instructions on this part.
 
 We use [Fast Winding Number](https://www.dgp.toronto.edu/projects/fast-winding-numbers/) for Inside-outside determination for point cloud inputs.
+Note that we use "oriented point cloud" in our paper. You can use [mesh_oriented_pc.py](mesh_oriented_pc.py) to generate this sample given a mesh input.
+After running the code you will get the input: [01Ants-12_mesh_ori_pc.obj](input/01Ants-12_mesh_ori_pc.obj) in the folder of [input](input).
+
+> If you want to process **unoriented point clouds**, please check out our SIGGRAPH 2023 work (SIGGRAPH 2023 The Best Paper Award): [Globally Consistent Normal Orientation for Point Clouds by Regularizing the Winding-Number Field](https://xrvitd.github.io/Projects/GCNO/index.html). Our  approach involves developing a smooth objective
+function to define the requirements of an acceptable WindingNumber Field, which facilitates the identification of globally consistent normal orientations for Unoriented Point Cloud, even in the presence of noisy normals.
+GCNO significantly outperforms previous methods, especially in handling sparse and noisy point clouds, as well as shapes with complex geometry and topology.
 
 Please use the following commands for building the modified [libigl](https://libigl.github.io/tutorial/) at https://github.com/Frank-ZY-Dou/libigl_CA. Note that [Eigen](http://eigen.tuxfamily.org/index.php?title=Main_Page#Download) is needed for libigl; make sure you have installed it.
 
@@ -141,13 +152,69 @@ cd build
 cmake ../
 make -j8
 ```
-Once finished, an executable file `FastWindingNumber_CA` will be generated in the folder `bin`. You can run it by
-```
+
+Once finished, you will get many executable files. Then, we will specifically focus on two files.
+```commandline
 cd bin
-./FastWindingNumber_CA ../../../input/01Ants-12_mesh.off ../../../input/01Ants-12_pc.obj ../../../input/01Ants-12_pc_random.obj
 ```
 
-A point cloud will be saved to `01Ants-12_pc.obj` in the folder `input`. A randomly generated candidate skeletal points will be written to `01Ants-12_pc_random.obj` under the folder `input`. 
+### FastWindingNumber
+You will find an executable file `807_FastWindingNumber` in the folder `bin`. This is a tutorial program.  
+You can run it by
+```commandline
+./807_FastWindingNumber
+```
+Press "1" twice to toggle between viewing the polygon soup and the point cloud.
+<p align="center">
+<img src="./assets/fig_wnf_t1_1.png" 
+        alt="Picture" 
+        width="400" 
+        height="150" 
+        style="display: block; margin: 0 auto" />
+</p>
+Press "2" twice to toggle between viewing the full query point cloud and the point cloud identified within the volume—these are the inside candidates we need.
+<p align="center">
+<img src="./assets/fig_wnf_t1_2.png" 
+        alt="Picture" 
+        width="400" 
+        height="150" 
+        style="display: block; margin: 0 auto" />
+</p>
+
+### FastWindingNumber_CA
+This is our case. Please remember to put the [01Ants-12_mesh_ori_pc.obj](input/01Ants-12_mesh_ori_pc.obj) in to the bin folder too.
+```commandline
+./807_FastWindingNumber_CA ./01Ants-12_mesh_ori_pc.obj  ./01Ants-12_mesh_inner_points.obj
+```
+Visulization:
+Press "1" twice to toggle between viewing the polygon soup and the point cloud.
+<p align="center">
+<img src="./assets/fig_wnf_t2_1.png" 
+        alt="Picture" 
+        width="200" 
+        height="150" 
+        style="display: block; margin: 0 auto" />
+</p>
+
+Press "2" twice to toggle between viewing the full query point cloud and the point cloud identified within the volume—these are the inside candidates we need.
+<p align="center">
+<img src="./assets/fig_wnf_t2_2.png" 
+        alt="Picture" 
+        width="200" 
+        height="150" 
+        style="display: block; margin: 0 auto" />
+</p>
+<p align="center">
+<img src="./assets/fig_wnf_t2_3.png" 
+        alt="Picture" 
+        width="200" 
+        height="150" 
+        style="display: block; margin: 0 auto" />
+</p>
+
+
+Here, ```01Ants-12_mesh_inner_points.obj``` is the output - inner candidate points, rename it to `01Ants-12_pc_random.obj` and move it under the folder `input`. 
+You can downsample the number of inner points if you want.
 
 Then run
 ```angular2html
