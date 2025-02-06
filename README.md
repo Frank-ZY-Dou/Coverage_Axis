@@ -214,7 +214,7 @@ Press "2" twice to toggle between viewing the full query point cloud and the poi
 </p>
 
 
-Here, ```01Ants-12_mesh_inner_points.obj``` is the output - inner candidate points, rename it to `01Ants-12_pc_random.obj` and move it under the folder `input`. 
+Once you run this code, you will get the output ```01Ants-12_mesh_inner_points.obj``` - inner candidate points. Please rename it to `01Ants-12_pc_random.obj` and move it under the folder `input`. 
 You can downsample the number of inner points if you want.
 
 Then run
