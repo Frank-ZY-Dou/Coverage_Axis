@@ -290,11 +290,15 @@ disp(fval);
 ```
 
 ```angular2html
-@article{wang2024coverage,
+@inproceedings{wang2024coverage,
   title={Coverage Axis++: Efficient Inner Point Selection for 3D Shape Skeletonization},
-  author={Wang, Zimeng and Dou, Zhiyang and Xu, Rui and Lin, Cheng and Liu, Yuan and Long, Xiaoxiao and Xin, Shiqing and Liu, Lingjie and Komura, Taku and Yuan, Xiaoming and others},
-  journal={arXiv preprint arXiv:2401.12946},
-  year={2024}
+  author={Wang, Zimeng and Dou, Zhiyang and Xu, Rui and Lin, Cheng and Liu, Yuan and Long, Xiaoxiao and Xin, Shiqing and Komura, Taku and Yuan, Xiaoming and Wang, Wenping},
+  booktitle={Computer Graphics Forum},
+  volume={43},
+  number={5},
+  pages={e15143},
+  year={2024},
+  organization={Wiley Online Library}
 }
 ```
 
