@@ -298,6 +298,19 @@ disp(fval);
 }
 ```
 
+```commandline
+@article{xu2023globally,
+  title={Globally consistent normal orientation for point clouds by regularizing the winding-number field},
+  author={Xu, Rui and Dou, Zhiyang and Wang, Ningna and Xin, Shiqing and Chen, Shuangmin and Jiang, Mingyan and Guo, Xiaohu and Wang, Wenping and Tu, Changhe},
+  journal={ACM Transactions on Graphics (TOG)},
+  volume={42},
+  number={4},
+  pages={1--15},
+  year={2023},
+  publisher={ACM New York, NY, USA}
+}
+```
+
 # References
 - https://libigl.github.io/tutorial/  Many thanks to the contributors of libigl :)
 - https://www.cgal.org/
