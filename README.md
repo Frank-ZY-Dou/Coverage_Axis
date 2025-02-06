@@ -154,7 +154,7 @@ cmake ../
 make -j8
 ```
 
-Once finished, you will get many executable files. Then, we will specifically focus on two files.
+Once finished, you will get two executable files under ```bin```: ```807_FastWindingNumber``` and ```807_FastWindingNumber_CA```.
 ```commandline
 cd bin
 ```
