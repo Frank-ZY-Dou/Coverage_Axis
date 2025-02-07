@@ -173,7 +173,7 @@ Press "1" twice to toggle between viewing the polygon soup and the point cloud.
         height="150" 
         style="display: block; margin: 0 auto" />
 </p>
-Press "2" twice to toggle between viewing the full query point cloud and the point cloud identified within the volume—these are the inside candidates we need.
+Press "2" twice to toggle between viewing the full query point cloud and the point cloud identified within the volume.
 <p align="center">
 <img src="./assets/fig_wnf_t1_2.png" 
         alt="Picture" 
@@ -183,7 +183,7 @@ Press "2" twice to toggle between viewing the full query point cloud and the poi
 </p>
 
 ### FastWindingNumber_CA
-This is our case. Please remember to put the [01Ants-12_mesh_ori_pc.obj](input/01Ants-12_mesh_ori_pc.obj) in to the bin folder too.
+**This is our case.** Please remember to put the input file [01Ants-12_mesh_ori_pc.obj](input/01Ants-12_mesh_ori_pc.obj) in to the bin folder.
 ```commandline
 ./807_FastWindingNumber_CA ./01Ants-12_mesh_ori_pc.obj  ./01Ants-12_mesh_inner_points.obj
 ```
