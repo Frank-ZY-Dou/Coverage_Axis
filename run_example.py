@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-使用示例脚本
-Updated: 根据QMAT使用指南更新
+Usage example script
+Updated: Updated according to QMAT usage guide
 """
 
 import subprocess
@@ -10,61 +10,61 @@ import sys
 import os
 
 def run_integrated_pipeline():
-    """运行集成流程的示例"""
+    """Example of running integrated pipeline"""
     
-    # 配置文件路径
+    # Configuration file paths
     mesh_file = "./input/offs/exp-lbs-beagle.off"
-    ma_file = "./input/offs/exp-lbs-beagle.ma"            # 输入MA文件
-    qmat_executable = "./skel_connection/QMAT/build/QMAT"  # QMAT可执行文件路径
+    ma_file = "./input/offs/exp-lbs-beagle.ma"            # Input MA file
+    qmat_executable = "./skel_connection/QMAT/build/QMAT"  # QMAT executable path
     
-    # 检查文件是否存在
+    # Check if files exist
     if not os.path.exists(mesh_file):
-        print(f"错误：mesh文件不存在: {mesh_file}")
-        print("请确保输入文件为.off格式")
+        print(f"Error: mesh file does not exist: {mesh_file}")
+        print("Please ensure input file is in .off format")
         return False
     
     if not os.path.exists(ma_file):
-        print(f"错误：MA文件不存在: {ma_file}")
+        print(f"Error: MA file does not exist: {ma_file}")
         return False
     
     if not os.path.exists(qmat_executable):
-        print(f"错误：QMAT可执行文件不存在: {qmat_executable}")
+        print(f"Error: QMAT executable does not exist: {qmat_executable}")
         return False
     
-    # 构建命令
+    # Build command
     cmd = [
         "python", "integrated_qmat_coverage_axis.py",
         "--mesh", mesh_file,
         "--ma", ma_file,
         "--qmat", qmat_executable,
-        "--vertices", "500",           # 目标球数量
-        "--samples", "3000",           # 表面采样点数量
-        "--dilation", "0.05",          # 膨胀参数
+        "--vertices", "500",           # Target number of spheres
+        "--samples", "3000",           # Surface sampling points
+        "--dilation", "0.05",          # Dilation parameter
     ]
     
-    print("运行集成流程...")
-    print(f"命令: {' '.join(cmd)}")
-    print("\n流程说明:")
-    print("1. QMAT常规简化 -> 生成简化的MA文件")
-    print("2. CoverageAxis算法 -> 选择最优内部点")
-    print("3. QMAT带选择极点简化 -> 生成最终结果")
+    print("Running integrated pipeline...")
+    print(f"Command: {' '.join(cmd)}")
+    print("\nPipeline description:")
+    print("1. QMAT regular simplification -> Generate simplified MA file")
+    print("2. CoverageAxis algorithm -> Select optimal interior points")
+    print("3. QMAT simplification with selected poles -> Generate final result")
     print()
     
     try:
         result = subprocess.run(cmd, check=True)
-        print("\n流程执行成功！")
-        print("\n生成的文件:")
-        print("- 中间结果: ./output/")
-        print("- QMAT临时文件: ./qmat_temp/")
-        print("- 最终结果: ./final_output/")
+        print("\nPipeline execution successful!")
+        print("\nGenerated files:")
+        print("- Intermediate results: ./output/")
+        print("- QMAT temporary files: ./qmat_temp/")
+        print("- Final results: ./final_output/")
         return True
     except subprocess.CalledProcessError as e:
-        print(f"\n流程执行失败: {e}")
+        print(f"\nPipeline execution failed: {e}")
         return False
 
 
 def run_skip_step1_example():
-    """跳过QMAT步骤1的示例（直接使用原始MA文件）"""
+    """Example of skipping QMAT step 1 (directly use original MA file)"""
     
     mesh_file = "./input/offs/exp-lbs-beagle.off"
     ma_file = "./input/offs/exp-lbs-beagle.ma"
@@ -78,31 +78,31 @@ def run_skip_step1_example():
         "--vertices", "500",
     ]
     
-    print("运行跳过步骤1的流程...")
-    print(f"命令: {' '.join(cmd)}")
+    print("Running pipeline that skips step 1...")
+    print(f"Command: {' '.join(cmd)}")
     
     try:
         result = subprocess.run(cmd, check=True)
-        print("流程执行成功！")
+        print("Pipeline execution successful!")
         return True
     except subprocess.CalledProcessError as e:
-        print(f"流程执行失败: {e}")
+        print(f"Pipeline execution failed: {e}")
         return False
 
 
 if __name__ == "__main__":
-    print("选择运行模式:")
-    print("1. 完整流程（包含QMAT步骤1）")
-    print("2. 跳过QMAT步骤1的流程")
+    print("Select running mode:")
+    print("1. Complete pipeline (including QMAT step 1)")
+    print("2. Pipeline skipping QMAT step 1")
     
-    choice = input("请输入选择 (1 或 2): ").strip()
+    choice = input("Please enter your choice (1 or 2): ").strip()
     
     if choice == "1":
         success = run_integrated_pipeline()
     elif choice == "2":
         success = run_skip_step1_example()
     else:
-        print("无效选择，运行默认完整流程")
+        print("Invalid choice, running default complete pipeline")
         success = run_integrated_pipeline()
     
     sys.exit(0 if success else 1) 

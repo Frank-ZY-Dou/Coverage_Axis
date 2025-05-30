@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
-集成QMAT和CoverageAxis的完整脚本
+Integrated QMAT and CoverageAxis complete script
 Author: Based on Coverage_Axis_plusplus_mesh.py
-Updated: 根据QMAT使用指南完善，支持多次运行的独立输出目录
+Updated: Improved according to QMAT usage guide, supports independent output directories for multiple runs
 """
 
 import os
@@ -23,13 +23,13 @@ try:
     from utils import save_obj, save_txt, read_VD, winding_number
     DEPENDENCIES_AVAILABLE = True
 except ImportError as e:
-    print(f"警告：缺少依赖库: {e}")
-    print("请安装: pip install torch trimesh numpy tqdm")
+    print(f"Warning: Missing dependency library: {e}")
+    print("Please install: pip install torch trimesh numpy tqdm")
     DEPENDENCIES_AVAILABLE = False
 
 
 def heuristic_alg(D, candidate, radius_list, reg_radius=1, reg=1, max_iter=1000, penalty='stand'):
-    """启发式算法求解覆盖问题"""
+    """Heuristic algorithm for solving coverage problem"""
     m, n = D.shape
     S = np.arange(m)
     A = []
@@ -62,43 +62,43 @@ def heuristic_alg(D, candidate, radius_list, reg_radius=1, reg=1, max_iter=1000,
 
 
 def compute_min_distances(X, selected_pts):
-    """计算最小距离"""
+    """Compute minimum distances"""
     distances = np.linalg.norm(X[:, np.newaxis] - selected_pts, axis=2)
     min_distances = np.min(distances, axis=1)
     return min_distances
 
 
 def create_run_directory(mesh_path, base_output_dir="./runs"):
-    """为每次运行创建独立的输出目录"""
-    # 获取mesh文件名（不含扩展名）
+    """Create independent output directory for each run"""
+    # Get mesh filename (without extension)
     mesh_name = Path(mesh_path).stem
     
-    # 创建时间戳
+    # Create timestamp
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     
-    # 创建运行目录名
+    # Create run directory name
     run_dir_name = f"{mesh_name}_{timestamp}"
     run_dir = os.path.join(base_output_dir, run_dir_name)
     
-    # 创建目录结构
+    # Create directory structure
     os.makedirs(run_dir, exist_ok=True)
     os.makedirs(os.path.join(run_dir, "input"), exist_ok=True)
     os.makedirs(os.path.join(run_dir, "coverage_axis_output"), exist_ok=True)
     os.makedirs(os.path.join(run_dir, "qmat_temp"), exist_ok=True)
     os.makedirs(os.path.join(run_dir, "final_output"), exist_ok=True)
     
-    print(f"创建运行目录: {run_dir}")
+    print(f"Created run directory: {run_dir}")
     return run_dir
 
 
 def extract_vertices_from_ma(input_file, output_file):
-    """从.ma文件中提取顶点信息，保存为VD格式"""
+    """Extract vertex information from .ma file and save in VD format"""
     vertices = []
     
     with open(input_file, 'r') as f:
         lines = f.readlines()
     
-    # 跳过第一行，处理顶点行
+    # Skip first line, process vertex lines
     for line in lines[1:]:
         line = line.strip()
         if line.startswith('v '):
@@ -109,70 +109,70 @@ def extract_vertices_from_ma(input_file, output_file):
                     r = float(parts[4])
                     vertices.append([x, y, z, r])
                 else:
-                    # 如果没有半径信息，设置默认值
+                    # If no radius information, set default value
                     vertices.append([x, y, z, 0.1])
     
-    # 保存为VD格式
+    # Save in VD format
     with open(output_file, 'w') as f:
         for vertex in vertices:
             f.write(f"v {vertex[0]} {vertex[1]} {vertex[2]} {vertex[3]}\n")
     
-    print(f"从 {input_file} 提取了 {len(vertices)} 个顶点，保存到 {output_file}")
+    print(f"Extracted {len(vertices)} vertices from {input_file}, saved to {output_file}")
     return len(vertices)
 
 
 def save_selected_points_for_qmat(points_with_radius, output_file):
-    """将选择的点保存为QMAT需要的格式"""
+    """Save selected points in the format required by QMAT"""
     with open(output_file, 'w') as f:
         for point in points_with_radius:
             f.write(f"v {point[0]} {point[1]} {point[2]} {point[3]}\n")
-    print(f"保存了 {len(points_with_radius)} 个选择的点到 {output_file}")
+    print(f"Saved {len(points_with_radius)} selected points to {output_file}")
 
 
 def run_qmat_step1(qmat_path, input_mesh_path, input_ma_path, target_vertices=500, output_dir="./qmat_output/"):
-    """运行QMAT第一步：常规简化"""
-    print(f"步骤1: 使用QMAT进行常规简化到 {target_vertices} 个球...")
+    """Run QMAT step 1: Regular simplification"""
+    print(f"Step 1: Using QMAT for regular simplification to {target_vertices} spheres...")
     
-    # 确保输出目录存在且以/结尾
+    # Ensure output directory exists and ends with /
     os.makedirs(output_dir, exist_ok=True)
     if not output_dir.endswith('/'):
         output_dir += '/'
     
     cmd = [qmat_path, "1", input_mesh_path, input_ma_path, str(target_vertices), output_dir]
-    print(f"执行命令: {' '.join(cmd)}")
+    print(f"Executing command: {' '.join(cmd)}")
     
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-        print("QMAT步骤1执行成功")
+        print("QMAT step 1 executed successfully")
         if result.stdout:
-            print("输出:", result.stdout)
+            print("Output:", result.stdout)
         
-        # 查找生成的MA文件
+        # Find generated MA files
         ma_files = glob.glob(os.path.join(output_dir, "export_half___v_*___e_*___f_*.ma"))
         if ma_files:
             simplified_ma_file = ma_files[0]
-            print(f"找到简化的MA文件: {simplified_ma_file}")
+            print(f"Found simplified MA file: {simplified_ma_file}")
             return True, simplified_ma_file
         else:
-            print("警告：未找到简化的MA文件")
+            print("Warning: Simplified MA file not found")
             return True, None
             
     except subprocess.CalledProcessError as e:
-        print(f"QMAT步骤1执行失败: {e}")
+        print(f"QMAT step 1 execution failed: {e}")
         if e.stderr:
-            print("错误信息:", e.stderr)
+            print("Error message:", e.stderr)
         return False, None
 
 
 def run_coverage_axis(input_mesh_path, vd_file_path, output_dir, surface_sample_num=3000, dilation=0.05):
-    """运行CoverageAxis算法"""
-    print("步骤2: 运行CoverageAxis算法...")
+    """Run CoverageAxis algorithm"""
+    print("Step 2: Running CoverageAxis algorithm...")
     
     if not DEPENDENCIES_AVAILABLE:
-        print("错误：缺少必要的依赖库，无法运行CoverageAxis")
+        print("Error: Missing necessary dependency libraries, cannot run CoverageAxis")
         return False
     
-    # 加载mesh
+    # Load mesh
     mesh = trimesh.load(input_mesh_path)
     point_set = trimesh.sample.sample_surface(mesh, surface_sample_num)
     
@@ -180,30 +180,30 @@ def run_coverage_axis(input_mesh_path, vd_file_path, output_dir, surface_sample_
     mesh_vertices = np.array(mesh.vertices)
     point_set = np.array(point_set[0])
     
-    print(f"Mesh信息: 面数={mesh_faces.shape[0]}, 顶点数={mesh_vertices.shape[0]}, 采样点数={point_set.shape[0]}")
+    print(f"Mesh info: faces={mesh_faces.shape[0]}, vertices={mesh_vertices.shape[0]}, sampling points={point_set.shape[0]}")
     
-    # 读取VD文件
+    # Read VD file
     try:
         inner_points, radius = read_VD(vd_file_path)
         inner_points = np.array(inner_points)
         radius_ori = np.array(radius)
         radius = radius_ori + dilation
         radius_list = np.reshape(radius_ori, -1)
-        print(f"从VD文件读取了 {len(inner_points)} 个内部点")
+        print(f"Read {len(inner_points)} interior points from VD file")
     except Exception as e:
-        print(f"读取VD文件失败: {e}")
+        print(f"Failed to read VD file: {e}")
         return False
     
-    # 确保输出目录存在
+    # Ensure output directory exists
     os.makedirs(output_dir, exist_ok=True)
     
-    # 保存中间结果
+    # Save intermediate results
     save_obj(os.path.join(output_dir, "mesh.obj"), mesh_vertices, mesh_faces)
     save_obj(os.path.join(output_dir, f"mesh_samples_{surface_sample_num}.obj"), point_set)
     save_obj(os.path.join(output_dir, "mesh_inner_points.obj"), inner_points)
     
-    # 计算覆盖矩阵
-    print("计算覆盖矩阵...")
+    # Calculate coverage matrix
+    print("Calculating coverage matrix...")
     point_set_g = torch.tensor(point_set).cuda().double()
     innerpoints_g = torch.tensor(inner_points).cuda().double()
     radius_g = torch.tensor(radius).cuda().double()
@@ -214,15 +214,15 @@ def run_coverage_axis(input_mesh_path, vd_file_path, output_dir, surface_sample_
     D = D.cpu().numpy()
     candidates = innerpoints_g.cpu().numpy()
     
-    # 使用启发式算法求解
-    print("使用启发式算法求解覆盖问题...")
+    # Solve using heuristic algorithm
+    print("Solving coverage problem using heuristic algorithm...")
     value_pos, grade, coverage_rate = heuristic_alg(D, candidates, radius_list, 
                                                    reg_radius=1, reg=1, max_iter=100, penalty='')
     
-    print(f"覆盖率: {100*(1-coverage_rate):.2f}%")
-    print(f"选择的内部点数量: {len(value_pos)}")
+    print(f"Coverage rate: {100*(1-coverage_rate):.2f}%")
+    print(f"Number of selected interior points: {len(value_pos)}")
     
-    # 保存结果
+    # Save results
     selected_points = inner_points[value_pos]
     selected_radius = radius_ori[value_pos]
     
@@ -230,7 +230,7 @@ def run_coverage_axis(input_mesh_path, vd_file_path, output_dir, surface_sample_
     save_txt(os.path.join(output_dir, "mesh_selected_inner_points.txt"), 
              np.concatenate((selected_points, selected_radius), axis=1))
     
-    # 为QMAT保存选择的点（格式：v x y z r）
+    # Save selected points for QMAT (format: v x y z r)
     points_with_radius = np.concatenate((selected_points, selected_radius), axis=1)
     selected_points_file = os.path.join(output_dir, "selected_points_for_qmat.txt")
     save_selected_points_for_qmat(points_with_radius, selected_points_file)
@@ -240,191 +240,191 @@ def run_coverage_axis(input_mesh_path, vd_file_path, output_dir, surface_sample_
 
 def run_qmat_step2(qmat_path, input_mesh_path, input_ma_path, target_vertices, 
                    selected_points_file, output_dir="./final_output/"):
-    """运行QMAT第二步：使用选择的极点进行简化"""
-    print("步骤3: 使用QMAT进行带选择极点的简化...")
+    """Run QMAT step 2: Simplification using selected poles"""
+    print("Step 3: Using QMAT for simplification with selected poles...")
     
-    # 确保输出目录存在且以/结尾
+    # Ensure output directory exists and ends with /
     os.makedirs(output_dir, exist_ok=True)
     if not output_dir.endswith('/'):
         output_dir += '/'
     
     cmd = [qmat_path, "2", input_mesh_path, input_ma_path, str(target_vertices), 
            output_dir, selected_points_file]
-    print(f"执行命令: {' '.join(cmd)}")
+    print(f"Executing command: {' '.join(cmd)}")
     
     try:
         result = subprocess.run(cmd, capture_output=True, text=True, check=True)
-        print("QMAT步骤2执行成功")
+        print("QMAT step 2 executed successfully")
         if result.stdout:
-            print("输出:", result.stdout)
+            print("Output:", result.stdout)
         
-        # 查找生成的文件
+        # Find generated files
         obj_files = glob.glob(os.path.join(output_dir, "sim_MA___v_*___e_*___f_*.obj"))
         ma_files = glob.glob(os.path.join(output_dir, "export_half___v_*___e_*___f_*.ma"))
         poles_files = glob.glob(os.path.join(output_dir, "test_all_poles.obj"))
         
-        print("生成的文件:")
+        print("Generated files:")
         if obj_files:
-            print(f"- 简化的MA (OBJ): {obj_files[0]}")
+            print(f"- Simplified MA (OBJ): {obj_files[0]}")
         if ma_files:
-            print(f"- 简化的MA (MA): {ma_files[0]}")
+            print(f"- Simplified MA (MA): {ma_files[0]}")
         if poles_files:
-            print(f"- 所有极点可视化: {poles_files[0]}")
+            print(f"- All poles visualization: {poles_files[0]}")
         
         return True, obj_files[0] if obj_files else None, ma_files[0] if ma_files else None
         
     except subprocess.CalledProcessError as e:
-        print(f"QMAT步骤2执行失败: {e}")
+        print(f"QMAT step 2 execution failed: {e}")
         if e.stderr:
-            print("错误信息:", e.stderr)
+            print("Error message:", e.stderr)
         return False, None, None
 
 
 def save_run_info(run_dir, args, results):
-    """保存运行信息到文件"""
+    """Save run information to file"""
     info_file = os.path.join(run_dir, "run_info.txt")
     with open(info_file, 'w', encoding='utf-8') as f:
         f.write("="*60 + "\n")
-        f.write("运行信息\n")
+        f.write("Run Information\n")
         f.write("="*60 + "\n")
-        f.write(f"运行时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
-        f.write(f"输入mesh: {args.mesh}\n")
-        f.write(f"输入MA: {args.ma}\n")
-        f.write(f"QMAT路径: {args.qmat}\n")
-        f.write(f"目标球数量: {args.vertices}\n")
-        f.write(f"表面采样点数量: {args.samples}\n")
-        f.write(f"膨胀参数: {args.dilation}\n")
-        f.write(f"跳过步骤1: {args.skip_step1}\n")
+        f.write(f"Run time: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write(f"Input mesh: {args.mesh}\n")
+        f.write(f"Input MA: {args.ma}\n")
+        f.write(f"QMAT path: {args.qmat}\n")
+        f.write(f"Target number of spheres: {args.vertices}\n")
+        f.write(f"Surface sampling points: {args.samples}\n")
+        f.write(f"Dilation parameter: {args.dilation}\n")
+        f.write(f"Skip step 1: {args.skip_step1}\n")
         f.write("\n")
-        f.write("生成的文件:\n")
+        f.write("Generated files:\n")
         for key, value in results.items():
             if value:
                 f.write(f"- {key}: {value}\n")
         f.write("="*60 + "\n")
     
-    print(f"运行信息已保存到: {info_file}")
+    print(f"Run information saved to: {info_file}")
 
 
 def main():
-    """主函数"""
-    parser = argparse.ArgumentParser(description='集成QMAT和CoverageAxis的完整流程')
-    parser.add_argument('--mesh', required=True, help='输入mesh文件路径 (.off)')
-    parser.add_argument('--ma', required=True, help='输入MA文件路径 (.ma)')
-    parser.add_argument('--qmat', required=True, help='QMAT可执行文件路径')
-    parser.add_argument('--vertices', type=int, default=500, help='目标球数量 (默认: 500)')
-    parser.add_argument('--samples', type=int, default=3000, help='表面采样点数量 (默认: 3000)')
-    parser.add_argument('--dilation', type=float, default=0.05, help='膨胀参数 (默认: 0.05)')
-    parser.add_argument('--runs-dir', default='./runs', help='运行目录根目录 (默认: ./runs)')
-    parser.add_argument('--skip-step1', action='store_true', help='跳过QMAT步骤1，直接使用原始MA文件')
+    """Main function"""
+    parser = argparse.ArgumentParser(description='Complete pipeline integrating QMAT and CoverageAxis')
+    parser.add_argument('--mesh', required=True, help='Input mesh file path (.off)')
+    parser.add_argument('--ma', required=True, help='Input MA file path (.ma)')
+    parser.add_argument('--qmat', required=True, help='QMAT executable file path')
+    parser.add_argument('--vertices', type=int, default=500, help='Target number of spheres (default: 500)')
+    parser.add_argument('--samples', type=int, default=3000, help='Surface sampling points (default: 3000)')
+    parser.add_argument('--dilation', type=float, default=0.05, help='Dilation parameter (default: 0.05)')
+    parser.add_argument('--runs-dir', default='./runs', help='Run directory root (default: ./runs)')
+    parser.add_argument('--skip-step1', action='store_true', help='Skip QMAT step 1, directly use original MA file')
     
     args = parser.parse_args()
     
-    # 检查输入文件
+    # Check input files
     if not os.path.exists(args.mesh):
-        print(f"错误：mesh文件不存在: {args.mesh}")
+        print(f"Error: mesh file does not exist: {args.mesh}")
         return False
     
     if not os.path.exists(args.ma):
-        print(f"错误：MA文件不存在: {args.ma}")
+        print(f"Error: MA file does not exist: {args.ma}")
         return False
     
     if not os.path.exists(args.qmat):
-        print(f"错误：QMAT可执行文件不存在: {args.qmat}")
+        print(f"Error: QMAT executable does not exist: {args.qmat}")
         return False
     
-    # 创建运行目录
+    # Create run directory
     run_dir = create_run_directory(args.mesh, args.runs_dir)
     
-    # 定义各个子目录
+    # Define subdirectories
     input_dir = os.path.join(run_dir, "input")
     coverage_output_dir = os.path.join(run_dir, "coverage_axis_output")
     qmat_temp_dir = os.path.join(run_dir, "qmat_temp")
     final_output_dir = os.path.join(run_dir, "final_output")
     
-    # 获取文件名（不含扩展名）
+    # Get filename (without extension)
     mesh_name = Path(args.mesh).stem
     
-    # 定义文件路径
+    # Define file paths
     vd_file = os.path.join(input_dir, f"{mesh_name}_VD.txt")
     
     print("="*60)
-    print("集成QMAT和CoverageAxis流程开始")
+    print("Integrated QMAT and CoverageAxis pipeline started")
     print("="*60)
-    print(f"输入mesh: {args.mesh}")
-    print(f"输入MA: {args.ma}")
-    print(f"QMAT路径: {args.qmat}")
-    print(f"目标球数量: {args.vertices}")
-    print(f"运行目录: {run_dir}")
+    print(f"Input mesh: {args.mesh}")
+    print(f"Input MA: {args.ma}")
+    print(f"QMAT path: {args.qmat}")
+    print(f"Target number of spheres: {args.vertices}")
+    print(f"Run directory: {run_dir}")
     print("="*60)
     
-    # 用于保存结果信息
+    # For saving result information
     results = {}
     
     try:
         simplified_ma_file = None
         
         if not args.skip_step1:
-            # 步骤1: 使用QMAT进行常规简化
+            # Step 1: Use QMAT for regular simplification
             success, simplified_ma_file = run_qmat_step1(args.qmat, args.mesh, args.ma, 
                                                         args.vertices, qmat_temp_dir + "/")
             if not success:
-                print("步骤1失败，流程终止")
+                print("Step 1 failed, pipeline terminated")
                 return False
-            results["QMAT步骤1简化MA"] = simplified_ma_file
+            results["QMAT step 1 simplified MA"] = simplified_ma_file
         
-        # 提取VD文件
+        # Extract VD file
         if simplified_ma_file and os.path.exists(simplified_ma_file):
-            print(f"从简化的MA文件提取VD: {simplified_ma_file}")
+            print(f"Extracting VD from simplified MA file: {simplified_ma_file}")
             extract_vertices_from_ma(simplified_ma_file, vd_file)
         else:
-            print(f"从原始MA文件提取VD: {args.ma}")
+            print(f"Extracting VD from original MA file: {args.ma}")
             extract_vertices_from_ma(args.ma, vd_file)
-        results["VD文件"] = vd_file
+        results["VD file"] = vd_file
         
-        # 步骤2: 运行CoverageAxis
+        # Step 2: Run CoverageAxis
         coverage_result = run_coverage_axis(args.mesh, vd_file, coverage_output_dir, 
                                           args.samples, args.dilation)
         if not coverage_result:
-            print("步骤2失败，流程终止")
+            print("Step 2 failed, pipeline terminated")
             return False
         
         success, selected_points_file = coverage_result
-        results["选择的点文件"] = selected_points_file
+        results["Selected points file"] = selected_points_file
         
-        # 检查选择的点文件是否存在
+        # Check if selected points file exists
         if not os.path.exists(selected_points_file):
-            print(f"错误：未找到选择的点文件: {selected_points_file}")
+            print(f"Error: Selected points file not found: {selected_points_file}")
             return False
         
-        # 步骤3: 使用QMAT进行带选择极点的简化
+        # Step 3: Use QMAT for simplification with selected poles
         success, final_obj, final_ma = run_qmat_step2(args.qmat, args.mesh, args.ma, 
                                                      args.vertices, selected_points_file, 
                                                      final_output_dir + "/")
         if not success:
-            print("步骤3失败，流程终止")
+            print("Step 3 failed, pipeline terminated")
             return False
         
-        results["最终简化MA (OBJ)"] = final_obj
-        results["最终简化MA (MA)"] = final_ma
+        results["Final simplified MA (OBJ)"] = final_obj
+        results["Final simplified MA (MA)"] = final_ma
         
-        # 保存运行信息
+        # Save run information
         save_run_info(run_dir, args, results)
         
         print("="*60)
-        print("流程完成！")
-        print(f"运行目录: {run_dir}")
-        print("目录结构:")
-        print(f"├── input/                    # 输入和VD文件")
-        print(f"├── coverage_axis_output/     # CoverageAxis中间结果")
-        print(f"├── qmat_temp/               # QMAT步骤1临时文件")
-        print(f"├── final_output/            # 最终输出文件")
-        print(f"└── run_info.txt             # 运行信息记录")
+        print("Pipeline completed!")
+        print(f"Run directory: {run_dir}")
+        print("Directory structure:")
+        print(f"├── input/                    # Input and VD files")
+        print(f"├── coverage_axis_output/     # CoverageAxis intermediate results")
+        print(f"├── qmat_temp/               # QMAT step 1 temporary files")
+        print(f"├── final_output/            # Final output files")
+        print(f"└── run_info.txt             # Run information record")
         print("="*60)
         
         return True
         
     except Exception as e:
-        print(f"流程执行过程中出现错误: {e}")
+        print(f"Error occurred during pipeline execution: {e}")
         import traceback
         traceback.print_exc()
         return False

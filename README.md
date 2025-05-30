@@ -62,6 +62,7 @@ We introduce Coverage Axis++, a novel and efficient approach to 3D shape skeleto
 ## Installation
 
 ```angular2html
+git clone https://github.com/Frank-ZY-Dou/Coverage_Axis --recursive
 conda env create -f ca.yml
 conda activate CA
 pip install -r requirements.txt
@@ -271,7 +272,8 @@ toc;
 disp('min_number:');
 disp(fval);
 ```
-
+### Get connection result
+We use Q-MAT to get connection result, please refer to [this document](./skel_connection/README.md). It has only been test on Ubuntu22.04.
 
 
 # Citation

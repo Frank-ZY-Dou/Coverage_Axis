@@ -99,28 +99,6 @@ python run_example.py
 - `export_half___v_X___e_Y___f_Z.ma`: Final simplified medial axis (MA format)
 - `test_all_poles.obj`: Visualization file of all poles
 
-## Process Details
-
-### Step 1: QMAT Regular Simplification (Optional)
-```bash
-./QMAT 1 <surface_mesh.off> <medial_mesh.ma> <num_target_spheres> <output_path>
-```
-- Perform regular simplification on original MA
-- Generate simplified MA file for subsequent processing
-
-### Step 2: CoverageAxis Algorithm
-1. Extract VD information from MA file (simplified or original)
-2. Load surface mesh and perform surface sampling
-3. Calculate coverage matrix
-4. Use heuristic algorithm to select optimal interior points
-5. Save selected points in format required by QMAT
-
-### Step 3: QMAT Simplification with Selected Poles
-```bash
-./QMAT 2 <surface_mesh.off> <medial_mesh.ma> <num_target_spheres> <output_path> <selected_points.txt>
-```
-- Use points selected by CoverageAxis as constraints
-- Generate simplified MA that preserves important features
 
 ## QMAT Output File Format
 

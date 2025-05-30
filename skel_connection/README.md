@@ -98,28 +98,7 @@ python run_example.py
 - `export_half___v_X___e_Y___f_Z.ma`: 最终简化的medial axis (MA格式)
 - `test_all_poles.obj`: 所有极点的可视化文件
 
-## 流程详解
 
-### 步骤1: QMAT常规简化 (可选)
-```bash
-./QMAT 1 <surface_mesh.off> <medial_mesh.ma> <num_target_spheres> <output_path>
-```
-- 对原始MA进行常规简化
-- 生成简化的MA文件用于后续处理
-
-### 步骤2: CoverageAxis算法
-1. 从MA文件（简化的或原始的）提取VD信息
-2. 加载surface mesh并进行表面采样
-3. 计算覆盖矩阵
-4. 使用启发式算法选择最优内部点
-5. 将选择的点保存为QMAT需要的格式
-
-### 步骤3: QMAT带选择极点的简化
-```bash
-./QMAT 2 <surface_mesh.off> <medial_mesh.ma> <num_target_spheres> <output_path> <selected_points.txt>
-```
-- 使用CoverageAxis选择的点作为约束
-- 生成保持重要特征的简化MA
 
 ## QMAT输出文件格式
 
@@ -130,23 +109,5 @@ python run_example.py
 
 其中X、Y、Z分别表示顶点数、边数、面数。
 
-## 注意事项
 
-1. **输入格式要求**: 
-   - Surface mesh必须是.off格式
-   - Medial axis必须是.ma格式
-2. **GPU要求**: CoverageAxis部分需要CUDA支持的GPU
-3. **内存要求**: 大型mesh可能需要大量内存
-4. **QMAT路径**: 确保QMAT可执行文件路径正确且有执行权限
-5. **输出目录**: 所有输出目录路径必须以'/'结尾
-
-
-## 自定义配置
-
-可以通过修改脚本中的参数来调整算法行为：
-
-- `surface_sample_num`: 表面采样点数量
-- `dilation`: 膨胀参数
-- `max_iter`: 启发式算法最大迭代次数
-- `reg_radius`, `reg`: 正则化参数
 
