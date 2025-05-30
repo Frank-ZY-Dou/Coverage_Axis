@@ -13,8 +13,8 @@ def run_integrated_pipeline():
     """运行集成流程的示例"""
     
     # 配置文件路径
-    mesh_file = "./input/bird/bird.off"          # 输入mesh文件（必须是.off格式）
-    ma_file = "./input/bird/bird.ma"             # 输入MA文件
+    mesh_file = "./input/offs/exp-lbs-beagle.off"
+    ma_file = "./input/offs/exp-lbs-beagle.ma"            # 输入MA文件
     qmat_executable = "/home/wjx/research/code/GaussianAnimator/QMAT/build/QMAT"  # QMAT可执行文件路径
     
     # 检查文件是否存在
@@ -40,8 +40,6 @@ def run_integrated_pipeline():
         "--vertices", "500",           # 目标球数量
         "--samples", "3000",           # 表面采样点数量
         "--dilation", "0.05",          # 膨胀参数
-        "--temp-dir", "./qmat_temp/",  # QMAT临时输出目录
-        "--output-dir", "./final_output/"  # 最终输出目录
     ]
     
     print("运行集成流程...")
@@ -68,8 +66,8 @@ def run_integrated_pipeline():
 def run_skip_step1_example():
     """跳过QMAT步骤1的示例（直接使用原始MA文件）"""
     
-    mesh_file = "./input/bird/bird.off"
-    ma_file = "./input/bird/bird.ma"
+    mesh_file = "./input/offs/exp-lbs-beagle.off"
+    ma_file = "./input/offs/exp-lbs-beagle.ma"
     qmat_executable = "/home/wjx/research/code/GaussianAnimator/QMAT/build/QMAT"
     
     cmd = [
@@ -78,8 +76,6 @@ def run_skip_step1_example():
         "--ma", ma_file,
         "--qmat", qmat_executable,
         "--vertices", "500",
-        "--skip-step1",  # 跳过QMAT步骤1
-        "--output-dir", "./final_output_direct/"
     ]
     
     print("运行跳过步骤1的流程...")

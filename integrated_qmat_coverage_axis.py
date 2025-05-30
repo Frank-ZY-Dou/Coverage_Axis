@@ -3,7 +3,7 @@
 """
 集成QMAT和CoverageAxis的完整脚本
 Author: Based on Coverage_Axis_plusplus_mesh.py
-Updated: 根据QMAT使用指南完善
+Updated: 根据QMAT使用指南完善，支持多次运行的独立输出目录
 """
 
 import os
@@ -13,6 +13,7 @@ import shutil
 import subprocess
 import glob
 from pathlib import Path
+from datetime import datetime
 
 try:
     import torch
@@ -65,6 +66,29 @@ def compute_min_distances(X, selected_pts):
     distances = np.linalg.norm(X[:, np.newaxis] - selected_pts, axis=2)
     min_distances = np.min(distances, axis=1)
     return min_distances
+
+
+def create_run_directory(mesh_path, base_output_dir="./runs"):
+    """为每次运行创建独立的输出目录"""
+    # 获取mesh文件名（不含扩展名）
+    mesh_name = Path(mesh_path).stem
+    
+    # 创建时间戳
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    
+    # 创建运行目录名
+    run_dir_name = f"{mesh_name}_{timestamp}"
+    run_dir = os.path.join(base_output_dir, run_dir_name)
+    
+    # 创建目录结构
+    os.makedirs(run_dir, exist_ok=True)
+    os.makedirs(os.path.join(run_dir, "input"), exist_ok=True)
+    os.makedirs(os.path.join(run_dir, "coverage_axis_output"), exist_ok=True)
+    os.makedirs(os.path.join(run_dir, "qmat_temp"), exist_ok=True)
+    os.makedirs(os.path.join(run_dir, "final_output"), exist_ok=True)
+    
+    print(f"创建运行目录: {run_dir}")
+    return run_dir
 
 
 def extract_vertices_from_ma(input_file, output_file):
@@ -140,7 +164,7 @@ def run_qmat_step1(qmat_path, input_mesh_path, input_ma_path, target_vertices=50
         return False, None
 
 
-def run_coverage_axis(input_mesh_path, vd_file_path, surface_sample_num=3000, dilation=0.05):
+def run_coverage_axis(input_mesh_path, vd_file_path, output_dir, surface_sample_num=3000, dilation=0.05):
     """运行CoverageAxis算法"""
     print("步骤2: 运行CoverageAxis算法...")
     
@@ -171,12 +195,12 @@ def run_coverage_axis(input_mesh_path, vd_file_path, surface_sample_num=3000, di
         return False
     
     # 确保输出目录存在
-    os.makedirs("./output", exist_ok=True)
+    os.makedirs(output_dir, exist_ok=True)
     
     # 保存中间结果
-    save_obj("./output/mesh.obj", mesh_vertices, mesh_faces)
-    save_obj(f"./output/mesh_samples_{surface_sample_num}.obj", point_set)
-    save_obj("./output/mesh_inner_points.obj", inner_points)
+    save_obj(os.path.join(output_dir, "mesh.obj"), mesh_vertices, mesh_faces)
+    save_obj(os.path.join(output_dir, f"mesh_samples_{surface_sample_num}.obj"), point_set)
+    save_obj(os.path.join(output_dir, "mesh_inner_points.obj"), inner_points)
     
     # 计算覆盖矩阵
     print("计算覆盖矩阵...")
@@ -202,15 +226,16 @@ def run_coverage_axis(input_mesh_path, vd_file_path, surface_sample_num=3000, di
     selected_points = inner_points[value_pos]
     selected_radius = radius_ori[value_pos]
     
-    save_obj("./output/mesh_selected_inner_points.obj", selected_points)
-    save_txt("./output/mesh_selected_inner_points.txt", 
+    save_obj(os.path.join(output_dir, "mesh_selected_inner_points.obj"), selected_points)
+    save_txt(os.path.join(output_dir, "mesh_selected_inner_points.txt"), 
              np.concatenate((selected_points, selected_radius), axis=1))
     
     # 为QMAT保存选择的点（格式：v x y z r）
     points_with_radius = np.concatenate((selected_points, selected_radius), axis=1)
-    save_selected_points_for_qmat(points_with_radius, "./output/selected_points_for_qmat.txt")
+    selected_points_file = os.path.join(output_dir, "selected_points_for_qmat.txt")
+    save_selected_points_for_qmat(points_with_radius, selected_points_file)
     
-    return True
+    return True, selected_points_file
 
 
 def run_qmat_step2(qmat_path, input_mesh_path, input_ma_path, target_vertices, 
@@ -255,6 +280,31 @@ def run_qmat_step2(qmat_path, input_mesh_path, input_ma_path, target_vertices,
         return False, None, None
 
 
+def save_run_info(run_dir, args, results):
+    """保存运行信息到文件"""
+    info_file = os.path.join(run_dir, "run_info.txt")
+    with open(info_file, 'w', encoding='utf-8') as f:
+        f.write("="*60 + "\n")
+        f.write("运行信息\n")
+        f.write("="*60 + "\n")
+        f.write(f"运行时间: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write(f"输入mesh: {args.mesh}\n")
+        f.write(f"输入MA: {args.ma}\n")
+        f.write(f"QMAT路径: {args.qmat}\n")
+        f.write(f"目标球数量: {args.vertices}\n")
+        f.write(f"表面采样点数量: {args.samples}\n")
+        f.write(f"膨胀参数: {args.dilation}\n")
+        f.write(f"跳过步骤1: {args.skip_step1}\n")
+        f.write("\n")
+        f.write("生成的文件:\n")
+        for key, value in results.items():
+            if value:
+                f.write(f"- {key}: {value}\n")
+        f.write("="*60 + "\n")
+    
+    print(f"运行信息已保存到: {info_file}")
+
+
 def main():
     """主函数"""
     parser = argparse.ArgumentParser(description='集成QMAT和CoverageAxis的完整流程')
@@ -264,8 +314,7 @@ def main():
     parser.add_argument('--vertices', type=int, default=500, help='目标球数量 (默认: 500)')
     parser.add_argument('--samples', type=int, default=3000, help='表面采样点数量 (默认: 3000)')
     parser.add_argument('--dilation', type=float, default=0.05, help='膨胀参数 (默认: 0.05)')
-    parser.add_argument('--temp-dir', default='./qmat_temp/', help='QMAT临时输出目录 (默认: ./qmat_temp/)')
-    parser.add_argument('--output-dir', default='./final_output/', help='最终输出目录 (默认: ./final_output/)')
+    parser.add_argument('--runs-dir', default='./runs', help='运行目录根目录 (默认: ./runs)')
     parser.add_argument('--skip-step1', action='store_true', help='跳过QMAT步骤1，直接使用原始MA文件')
     
     args = parser.parse_args()
@@ -283,16 +332,20 @@ def main():
         print(f"错误：QMAT可执行文件不存在: {args.qmat}")
         return False
     
-    # 创建必要的目录
-    os.makedirs("./input", exist_ok=True)
-    os.makedirs("./output", exist_ok=True)
+    # 创建运行目录
+    run_dir = create_run_directory(args.mesh, args.runs_dir)
+    
+    # 定义各个子目录
+    input_dir = os.path.join(run_dir, "input")
+    coverage_output_dir = os.path.join(run_dir, "coverage_axis_output")
+    qmat_temp_dir = os.path.join(run_dir, "qmat_temp")
+    final_output_dir = os.path.join(run_dir, "final_output")
     
     # 获取文件名（不含扩展名）
     mesh_name = Path(args.mesh).stem
     
     # 定义文件路径
-    vd_file = f"./input/{mesh_name}_VD.txt"
-    selected_points_file = "./output/selected_points_for_qmat.txt"
+    vd_file = os.path.join(input_dir, f"{mesh_name}_VD.txt")
     
     print("="*60)
     print("集成QMAT和CoverageAxis流程开始")
@@ -301,9 +354,11 @@ def main():
     print(f"输入MA: {args.ma}")
     print(f"QMAT路径: {args.qmat}")
     print(f"目标球数量: {args.vertices}")
-    print(f"临时目录: {args.temp_dir}")
-    print(f"最终输出目录: {args.output_dir}")
+    print(f"运行目录: {run_dir}")
     print("="*60)
+    
+    # 用于保存结果信息
+    results = {}
     
     try:
         simplified_ma_file = None
@@ -311,10 +366,11 @@ def main():
         if not args.skip_step1:
             # 步骤1: 使用QMAT进行常规简化
             success, simplified_ma_file = run_qmat_step1(args.qmat, args.mesh, args.ma, 
-                                                        args.vertices, args.temp_dir)
+                                                        args.vertices, qmat_temp_dir + "/")
             if not success:
                 print("步骤1失败，流程终止")
                 return False
+            results["QMAT步骤1简化MA"] = simplified_ma_file
         
         # 提取VD文件
         if simplified_ma_file and os.path.exists(simplified_ma_file):
@@ -323,11 +379,17 @@ def main():
         else:
             print(f"从原始MA文件提取VD: {args.ma}")
             extract_vertices_from_ma(args.ma, vd_file)
+        results["VD文件"] = vd_file
         
         # 步骤2: 运行CoverageAxis
-        if not run_coverage_axis(args.mesh, vd_file, args.samples, args.dilation):
+        coverage_result = run_coverage_axis(args.mesh, vd_file, coverage_output_dir, 
+                                          args.samples, args.dilation)
+        if not coverage_result:
             print("步骤2失败，流程终止")
             return False
+        
+        success, selected_points_file = coverage_result
+        results["选择的点文件"] = selected_points_file
         
         # 检查选择的点文件是否存在
         if not os.path.exists(selected_points_file):
@@ -337,20 +399,26 @@ def main():
         # 步骤3: 使用QMAT进行带选择极点的简化
         success, final_obj, final_ma = run_qmat_step2(args.qmat, args.mesh, args.ma, 
                                                      args.vertices, selected_points_file, 
-                                                     args.output_dir)
+                                                     final_output_dir + "/")
         if not success:
             print("步骤3失败，流程终止")
             return False
         
+        results["最终简化MA (OBJ)"] = final_obj
+        results["最终简化MA (MA)"] = final_ma
+        
+        # 保存运行信息
+        save_run_info(run_dir, args, results)
+        
         print("="*60)
         print("流程完成！")
-        print("生成的文件:")
-        if final_obj:
-            print(f"- 最终简化MA (OBJ): {final_obj}")
-        if final_ma:
-            print(f"- 最终简化MA (MA): {final_ma}")
-        print(f"- 中间结果目录: ./output/")
-        print(f"- 最终结果目录: {args.output_dir}")
+        print(f"运行目录: {run_dir}")
+        print("目录结构:")
+        print(f"├── input/                    # 输入和VD文件")
+        print(f"├── coverage_axis_output/     # CoverageAxis中间结果")
+        print(f"├── qmat_temp/               # QMAT步骤1临时文件")
+        print(f"├── final_output/            # 最终输出文件")
+        print(f"└── run_info.txt             # 运行信息记录")
         print("="*60)
         
         return True
