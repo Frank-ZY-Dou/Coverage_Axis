@@ -15,7 +15,7 @@ def run_integrated_pipeline():
     # 配置文件路径
     mesh_file = "./input/offs/exp-lbs-beagle.off"
     ma_file = "./input/offs/exp-lbs-beagle.ma"            # 输入MA文件
-    qmat_executable = "/home/wjx/research/code/GaussianAnimator/QMAT/build/QMAT"  # QMAT可执行文件路径
+    qmat_executable = "./skel_connection/QMAT/build/QMAT"  # QMAT可执行文件路径
     
     # 检查文件是否存在
     if not os.path.exists(mesh_file):
@@ -68,7 +68,7 @@ def run_skip_step1_example():
     
     mesh_file = "./input/offs/exp-lbs-beagle.off"
     ma_file = "./input/offs/exp-lbs-beagle.ma"
-    qmat_executable = "/home/wjx/research/code/GaussianAnimator/QMAT/build/QMAT"
+    qmat_executable = "./skel_connection/QMAT/build/QMAT"
     
     cmd = [
         "python", "integrated_qmat_coverage_axis.py",

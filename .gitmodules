@@ -1,3 +1,4 @@
 [submodule "skel_connection/QMAT"]
 	path = skel_connection/QMAT
 	url = https://github.com/Net-Maker/QMAT
+	branch = main
