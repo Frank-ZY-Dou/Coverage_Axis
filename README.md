@@ -37,6 +37,11 @@ In this paper, we present a simple yet effective formulation called Coverage Axi
 🐱 **[Coverage Axis++: Efficient Inner Point Selection for 3D Shape Skeletonization
 ](https://arxiv.org/abs/2401.12946), SGP 2024**.
 
+```diff
++ Top View Article in Computer Graphics Forum (CGF) 2024.
+```
+
+
 Authors: Zimeng Wang*, 
 [Zhiyang Dou*](https://frank-zy-dou.github.io/),
 [Rui Xu](https://xrvitd.github.io/index.html),
