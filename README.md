@@ -7,7 +7,8 @@
 - 🌟Coverage Axis++.
   - Coverage Axis++: Efficient Inner Point Selection for 3D Shape Skeletonization: https://arxiv.org/abs/2401.12946.
 
-We recently added **an integrated pipeline (credit to [Jiaxin Wang](https://github.com/Net-Maker)): [integrated_qmat_coverage_axis.py](https://github.com/Frank-ZY-Dou/Coverage_Axis/blob/main/integrated_qmat_coverage_axis.py)** You will be using Q-MAT (see more instructions [here](https://github.com/Frank-ZY-Dou/Coverage_Axis/blob/main/skel_connection/README_EN.md)).
+- **[May, 2026]** Added an integrated pipeline with **GPU Q-MAT** (beta): a GPU re-implementation of Q-MAT medial-axis simplification (NVIDIA Warp), with native support for preserving Coverage Axis poles via `--selected-poles`. See [Geometry_Tools/QMAT_GPU](https://github.com/Frank-ZY-Dou/Geometry_Tools/tree/main/QMAT_GPU).
+- **[Aug, 2025]** Added an integrated pipeline (credit to [Jiaxin Wang](https://github.com/Net-Maker)): [integrated_qmat_coverage_axis.py](https://github.com/Frank-ZY-Dou/Coverage_Axis/blob/main/integrated_qmat_coverage_axis.py). You will be using Q-MAT (see more instructions [here](https://github.com/Frank-ZY-Dou/Coverage_Axis/blob/main/skel_connection/README_EN.md)).
 
 
 
