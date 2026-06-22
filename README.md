@@ -1,18 +1,22 @@
 # Introduction
-- 🌟Coverage Axis.
-  - We provide Coverage Axis computation for both mesh and point cloud inputs. 
+
+This repository provides two skeletonization methods based on inner-point selection:
+
+- 🌟 **Coverage Axis.**
+  - Coverage Axis computation for both mesh and point cloud inputs.
     - The point cloud can be **unoriented** -> check out our latest SIGGRAPH 2023 work [here](https://xrvitd.github.io/Projects/GCNO/index.html).
   - Operations are accelerated by GPU, e.g., computation of coverage matrix and winding number for a mesh.
-  - We provide codes for building connectivity in [skel_connection](skel_connection): [README.md]([skel_connection%2Freadme.md](https://github.com/Frank-ZY-Dou/Coverage_Axis/blob/main/skel_connection/README_EN.md)).
-- 🌟Coverage Axis++.
+  - Codes for building connectivity are in [skel_connection](skel_connection): [README.md](https://github.com/Frank-ZY-Dou/Coverage_Axis/blob/main/skel_connection/README_EN.md).
+- 🌟 **Coverage Axis++.**
   - Coverage Axis++: Efficient Inner Point Selection for 3D Shape Skeletonization: https://arxiv.org/abs/2401.12946.
 
+Related: some geometry tools for MAT and related topics are in [Geometry_Tools](https://github.com/Frank-ZY-Dou/Geometry_Tools).
+
+## News
+
+- **[June, 2026]** Added a **GPU-accelerated exact SCP solver** for the Coverage Axis point-selection step (beta): it keeps the original 0-1 set-cover problem and its **global optimum** (no heuristic approximation), building the coverage relation on the GPU (NVIDIA Warp) and solving the integer program exactly. Independently verified to return the same proven-optimal selection as the reference, several times faster. See [Geometry_Tools/Coverage_Axis_SCP_GPU](https://github.com/Frank-ZY-Dou/Geometry_Tools/tree/main/Coverage_Axis_SCP_GPU).
 - **[May, 2026]** Added an integrated pipeline with **GPU Q-MAT** (beta): a GPU re-implementation of Q-MAT medial-axis simplification (NVIDIA Warp), with native support for preserving Coverage Axis poles via `--selected-poles`. See [Geometry_Tools/QMAT_GPU](https://github.com/Frank-ZY-Dou/Geometry_Tools/tree/main/QMAT_GPU).
 - **[Aug, 2025]** Added an integrated pipeline (credit to [Jiaxin Wang](https://github.com/Net-Maker)): [integrated_qmat_coverage_axis.py](https://github.com/Frank-ZY-Dou/Coverage_Axis/blob/main/integrated_qmat_coverage_axis.py). You will be using Q-MAT (see more instructions [here](https://github.com/Frank-ZY-Dou/Coverage_Axis/blob/main/skel_connection/README_EN.md)).
-
-
-
-Some geometry tools for MAT and related topics: [Geometry_Tools](https://github.com/Frank-ZY-Dou/Geometry_Tools).
 
 🐱 **[Coverage Axis: Inner Point Selection for 3D Shape Skeletonization
 ](https://arxiv.org/abs/2110.00965), Eurographics 2022**.
