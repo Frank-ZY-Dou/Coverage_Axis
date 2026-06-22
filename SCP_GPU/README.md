@@ -1,10 +1,10 @@
-# Coverage Axis SCP — GPU-accelerated exact solver
+# Coverage Axis SCP (GPU)
 
-GPU-accelerated, **exact** solver for the point-selection step of
+GPU-accelerated exact solver for the point-selection step of
 [Coverage Axis](https://github.com/Frank-ZY-Dou/Coverage_Axis) (Dou et al. 2022).
 
-Coverage Axis picks inner skeletal points by solving a 0-1 **Set Cover Program
-(SCP)** over a finite surface sample:
+Coverage Axis selects inner skeletal points by solving a 0-1 set cover program
+over a finite surface sample:
 
 ```
 min  sum_i x_i
@@ -12,48 +12,49 @@ s.t. sum_{i : ball i covers surface point j} x_i >= 1   for every j
      x_i in {0,1}
 ```
 
-where `x_i = 1` keeps inner ball `i`. This solver keeps the **same program and
-its global optimum** — no heuristic, no approximation — and reaches it faster by
+`x_i = 1` keeps inner ball `i`. This solver computes the same optimal selection
+as the original Coverage Axis (no heuristic), but faster:
 
-- building the coverage relation as packed bitsets on the GPU (NVIDIA Warp),
-- solving the integer program exactly with CP-SAT (OR-Tools) or HiGHS,
-- optional optimum-preserving presolve (unique-cover forcing, dominance, dedup).
+- the coverage relation is built as packed bitsets on the GPU (NVIDIA Warp);
+- the integer program is solved exactly with CP-SAT (OR-Tools) or HiGHS;
+- an optional presolve (unique-cover forcing, dominance, dedup) shrinks it
+  without changing the optimum.
 
 ## Why
 
-The reference Coverage Axis builds the coverage matrix `D` and solves it with
-`scipy.optimize.milp` (HiGHS) under a wall-clock cutoff. On larger instances
-that solve becomes the bottleneck. Here the coverage matrix is built on the GPU
-and the exact solve uses a parallel CP-SAT backend; the returned selection is the
-**same proven-optimal** set, several times faster.
+The original Coverage Axis builds the coverage matrix `D` and solves it with
+`scipy.optimize.milp` (HiGHS) under a time limit. On larger inputs that solve
+dominates the runtime. Building `D` on the GPU and solving with a parallel
+CP-SAT backend gives the same optimal selection in less time.
 
-## Results (beagle surface; one RTX 2080 Ti, 8-core CP-SAT)
+## Speed
+
+Beagle surface, one RTX 2080 Ti, CP-SAT with 8 workers:
 
 ```
-HARD instance: 8000 surface points x 6000 candidates
-  coverage build : numpy 2.28s  ->  GPU/Warp 0.02s   (113x, identical coverage)
-  exact solve    : HiGHS 11.66s ->  CP-SAT  3.00s    (3.9x, objective 42, proven optimal)
-  end-to-end     : 13.93s       ->  3.02s            (4.6x, same global optimum)
+8000 surface points x 6000 candidates
+  coverage build : numpy 2.28s  ->  GPU 0.02s     (identical coverage)
+  exact solve    : HiGHS 11.66s ->  CP-SAT 3.00s   (objective 42, proven optimal)
+  end-to-end     : 13.93s       ->  3.02s          (same optimum)
 
-EASY instance: 2500 x 2500   ->  objective 22, end-to-end ~1.8x, same optimum
+2500 x 2500  ->  objective 22, same optimum
 ```
 
-All backends return the **identical objective**, proven optimal and feasible.
-Notes on the numbers: CP-SAT runs with 8 workers while `scipy.milp` (HiGHS) is
-serial, so part of the solve speedup is parallelism; the GPU-build and end-to-end
-figures are steady-state (a single cold run pays a one-time ~7 s Warp/CUDA
-startup). The selection itself is unchanged.
+Two caveats when reading these. CP-SAT uses 8 threads while `scipy.milp` is
+serial, so some of the solve speedup is parallelism. The GPU-build and
+end-to-end times are steady-state; the first run also pays a one-time ~7 s
+Warp/CUDA startup. The selection is the same either way.
 
-## Optimality is certified, not asserted
+## Verification
 
-`verify.py` confirms the result independently of any solver's "optimal" flag:
+`verify.py` checks the result without relying on the solver's own "optimal" flag:
 
-- **feasibility** — recompute the coverage from raw geometry; the selection
-  covers every surface point;
-- **two independent solves** (HiGHS and CP-SAT) agree on the objective;
-- **LP lower-bound certificate** — `ceil(LP relaxation) == objective` proves
-  optimality;
-- **brute force** — on small random instances the result matches the exhaustive
+- feasibility: recompute the coverage from the raw geometry and confirm the
+  selection covers every surface point;
+- two independent solves (HiGHS and CP-SAT) return the same objective;
+- LP lower bound: `ceil(LP relaxation)` equals the objective, which proves it is
+  optimal;
+- brute force: on small random instances the result matches the exhaustive
   minimum cover.
 
 ## Install
@@ -61,6 +62,7 @@ startup). The selection itself is unchanged.
 ```bash
 pip install warp-lang ortools scipy numpy        # CP-SAT backend (recommended)
 # scipy alone is enough for the HiGHS backend
+pip install polyscope                             # optional, for viz_scp.py
 ```
 
 A CUDA GPU is used for the coverage build (NVIDIA Warp); a CPU fallback is
@@ -80,7 +82,21 @@ python compare.py --inst ants.npz
 
 # 3. independent optimality / feasibility check
 python verify.py  --inst ants.npz --brute
+
+# 4. visualize: reference vs GPU selection over the surface (headless EGL -> figs/)
+python viz_scp.py --off ../input/01Ants-12_mesh.off --inst ants.npz --name ants
 ```
+
+The selected inner points are drawn as spheres over the surface. Both solvers
+reach the same optimum (46 poles, proven); they can pick different but
+equally-optimal pole sets.
+
+<table>
+<tr>
+<td align="center"><img src="figs/ants_reference_scp.png" width="340"/><br/><sub>reference solver (HiGHS) — 46 poles</sub></td>
+<td align="center"><img src="figs/ants_gpu_scp.png" width="340"/><br/><sub>GPU solver — 46 poles</sub></td>
+</tr>
+</table>
 
 Programmatic use:
 
@@ -99,9 +115,10 @@ print(res["objective"], res["proven_optimal"])
 | `scp_fast.py`  | GPU/Warp bitset coverage build, vectorized presolve, exact-solve pipeline |
 | `scp_exact.py` | coverage CSR, full presolve (dominance reductions), CP-SAT / HiGHS solvers |
 | `gen_instance.py` | build an SCP instance from a `.off` surface mesh |
-| `compare.py`   | head-to-head solution + runtime comparison of the backends |
-| `verify.py`    | independent feasibility / LP-certificate / brute-force optimality checks |
+| `compare.py`   | solution + runtime comparison of the backends |
+| `verify.py`    | feasibility / LP-bound / brute-force checks |
 | `bench_scp.py` | reference-vs-accelerated benchmark asserting identical optimum |
+| `viz_scp.py`   | polyscope visualization: reference (red) vs GPU (blue) selected poles |
 
 ## Citation
 
@@ -119,4 +136,4 @@ print(res["objective"], res["proven_optimal"])
 
 ## License
 
-Released under the [MIT License](LICENSE).
+[MIT](LICENSE).
