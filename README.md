@@ -15,8 +15,6 @@ Related: some geometry tools for MAT and related topics are in [Geometry_Tools](
 ## News
 
 - **[June, 2026]** Added a GPU-accelerated exact solver for the Coverage Axis point-selection step (beta). It solves the same 0-1 set-cover program and returns the same optimal selection as the original (no heuristic), with the coverage matrix built on the GPU (NVIDIA Warp) and the integer program solved exactly. Includes a double-cover-of-a-torus example (offset the surface inward and outward, then cover both shells). See [`CA_GPU`](CA_GPU).
-
-  <img src="CA_GPU/figs/double_torus_result.png" width="300"/>
 - **[May, 2026]** Added an integrated pipeline with **GPU Q-MAT** (beta): a GPU re-implementation of Q-MAT medial-axis simplification (NVIDIA Warp), with native support for preserving Coverage Axis poles via `--selected-poles`. See [Geometry_Tools/QMAT_GPU](https://github.com/Frank-ZY-Dou/Geometry_Tools/tree/main/QMAT_GPU).
 - **[Aug, 2025]** Added an integrated pipeline (credit to [Jiaxin Wang](https://github.com/Net-Maker)): [integrated_qmat_coverage_axis.py](https://github.com/Frank-ZY-Dou/Coverage_Axis/blob/main/integrated_qmat_coverage_axis.py). You will be using Q-MAT (see more instructions [here](https://github.com/Frank-ZY-Dou/Coverage_Axis/blob/main/skel_connection/README_EN.md)).
 
@@ -133,6 +131,18 @@ For Coverage Axis++, run
 ```angular2html
 python Coverage_Axis_plusplus_pc.py
 ```
+
+A GPU-accelerated exact solver for this point-selection step, with a
+double-cover example, is in [`CA_GPU`](CA_GPU). Offsetting a surface inward and
+outward gives two shells; sampling candidates on the original surface, Coverage
+Axis selects points that cover both shells:
+
+<table>
+<tr>
+<td align="center"><img src="CA_GPU/figs/double_torus_input.png" width="320"/><br/><sub>original mesh (yellow) + double cover</sub></td>
+<td align="center"><img src="CA_GPU/figs/double_torus_result.png" width="320"/><br/><sub>original mesh + selected points</sub></td>
+</tr>
+</table>
 
 
 ## Point Cloud Input
