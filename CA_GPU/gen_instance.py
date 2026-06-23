@@ -62,6 +62,16 @@ def nn_dist(P, Ref, chunk=512):
     return out
 
 
+def sample_surface(V, F, n, rng):
+    """Area-weighted uniform samples on the triangle mesh surface."""
+    area = 0.5 * np.linalg.norm(np.cross(V[F[:, 1]] - V[F[:, 0]], V[F[:, 2]] - V[F[:, 0]]), axis=1)
+    fi = rng.choice(len(F), size=n, p=area / area.sum())
+    u, v = rng.random(n), rng.random(n)
+    over = u + v > 1.0; u[over] = 1 - u[over]; v[over] = 1 - v[over]
+    a, b, c = V[F[fi, 0]], V[F[fi, 1]], V[F[fi, 2]]
+    return a + u[:, None] * (b - a) + v[:, None] * (c - a)
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--off", required=True)
@@ -69,12 +79,38 @@ def main():
     ap.add_argument("--n-candidates", type=int, default=3000)
     ap.add_argument("--n-surface", type=int, default=3000)
     ap.add_argument("--dilation", type=float, default=0.04, help="ball dilation, fraction of bbox diagonal")
+    ap.add_argument("--on-surface", action="store_true",
+                    help="sample candidates ON a surface (fixed cover radius) instead of inside")
+    ap.add_argument("--candidate-off", default=None,
+                    help="mesh to sample candidates from (.obj/.off); defaults to --off")
+    ap.add_argument("--cover-radius", type=float, default=0.08,
+                    help="surface-candidate ball radius, fraction of bbox diagonal (with --on-surface)")
     ap.add_argument("--seed", type=int, default=0)
     args = ap.parse_args()
     rng = np.random.default_rng(args.seed)
     V, F = parse_off(Path(args.off))
     lo, hi = V.min(0), V.max(0); bbdiag = float(np.linalg.norm(hi - lo))
     dil = args.dilation * bbdiag
+
+    if args.on_surface:
+        # Candidates are sampled on the candidate mesh (e.g. the original
+        # surface), and they must cover the points sampled on --off (e.g. the
+        # double cover's two offset shells). Every ball has the same radius.
+        from make_double_cover import load_mesh
+        cV, cF = load_mesh(Path(args.candidate_off)) if args.candidate_off else (V, F)
+        C = sample_surface(cV, cF, args.n_candidates, rng)
+        S = sample_surface(V, F, args.n_surface, rng)
+        R = np.full(len(C), args.cover_radius * bbdiag)
+        n0 = len(S); keep = np.zeros(n0, dtype=bool)
+        for s in range(0, n0, 512):
+            e = min(s + 512, n0)
+            d2 = ((S[s:e, None, :] - C[None, :, :]) ** 2).sum(-1)
+            keep[s:e] = (d2 < (R[None, :] ** 2)).any(1)
+        S = S[keep]
+        np.savez(args.out, surface=S, centers=C, radii=R, bbdiag=bbdiag, dilation=R[0])
+        print(f"[gen/surface] {Path(args.off).name}: surface={len(S)} (dropped {n0-len(S)}) "
+              f"candidates={len(C)} cover_radius={R[0]:.4f} bbdiag={bbdiag:.4f} -> {args.out}")
+        return
 
     cand, tries = [], 0
     while sum(len(x) for x in cand) < args.n_candidates and tries < 80:

@@ -1,4 +1,4 @@
-# Coverage Axis SCP (GPU)
+# Coverage Axis (GPU)
 
 GPU-accelerated exact solver for the point-selection step of
 [Coverage Axis](https://github.com/Frank-ZY-Dou/Coverage_Axis) (Dou et al. 2022).
@@ -108,13 +108,39 @@ selected = res["selected"]          # indices of the chosen inner points
 print(res["objective"], res["proven_optimal"])
 ```
 
+## Example: double cover of a torus
+
+Offset a surface inward and outward along its normal to get two parallel shells.
+Sampling candidate balls on the *original* surface, Coverage Axis picks a small
+set whose balls cover the points on both shells, so the selected original-surface
+points form a sampling that covers the whole doubled band.
+
+```bash
+python make_double_cover.py --in ../input/Torus.obj --out double_torus.off --delta 0.025
+python gen_instance.py --off double_torus.off --candidate-off ../input/Torus.obj \
+    --out double_torus.npz --on-surface --n-candidates 1200 --n-surface 700 --cover-radius 0.045
+python compare.py  --inst double_torus.npz
+python viz_scp.py  --off double_torus.off --inst double_torus.npz --name double_torus
+```
+
+Both solvers return 113 poles, proven optimal. A smaller `--cover-radius` gives
+denser poles; a larger one gives fewer poles but a combinatorially harder solve.
+
+<table>
+<tr>
+<td align="center"><img src="figs/double_torus_input.png" width="340"/><br/><sub>original mesh (yellow) + double cover</sub></td>
+<td align="center"><img src="figs/double_torus_result.png" width="340"/><br/><sub>original mesh + selected points</sub></td>
+</tr>
+</table>
+
 ## Files
 
 | file | role |
 |---|---|
 | `scp_fast.py`  | GPU/Warp bitset coverage build, vectorized presolve, exact-solve pipeline |
 | `scp_exact.py` | coverage CSR, full presolve (dominance reductions), CP-SAT / HiGHS solvers |
-| `gen_instance.py` | build an SCP instance from a `.off` surface mesh |
+| `gen_instance.py` | build an SCP instance from a mesh (inner candidates, or `--on-surface`) |
+| `make_double_cover.py` | offset a mesh +/- delta along normals into two shells |
 | `compare.py`   | solution + runtime comparison of the backends |
 | `verify.py`    | feasibility / LP-bound / brute-force checks |
 | `bench_scp.py` | reference-vs-accelerated benchmark asserting identical optimum |
