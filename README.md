@@ -1,5 +1,7 @@
 # Introduction
 
+License: MIT.
+
 This repository provides two skeletonization methods based on inner-point selection:
 
 - 🌟 **Coverage Axis.**
@@ -347,7 +349,6 @@ We use Q-MAT to get connection result, please refer to [this document](./skel_co
 - https://libigl.github.io/tutorial/  Many thanks to the contributors of libigl :)
 - https://www.cgal.org/
 - https://gist.github.com/dendenxu/ee5008acb5607195582e7983a384e644
-
 
 
 
