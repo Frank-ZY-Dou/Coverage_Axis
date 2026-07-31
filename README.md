@@ -350,5 +350,8 @@ We use Q-MAT to get connection result, please refer to [this document](./skel_co
 - https://www.cgal.org/
 - https://gist.github.com/dendenxu/ee5008acb5607195582e7983a384e644
 
+# License
 
+This repository is released under the [MIT License](LICENSE). Third-party
+components retain their original copyright notices and licensing terms.
 
