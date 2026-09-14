@@ -6,7 +6,6 @@ import numpy as np
 from tqdm import tqdm
 from utils import  save_obj,read_VD, winding_number
 from scipy.optimize import milp, Bounds, LinearConstraint
-from mip import Model, xsum, maximize, BINARY
 
 
 real_name = '01Ants-12_mesh'
@@ -76,7 +75,7 @@ save_obj("./output/mesh_inner_points.obj", inner_points)
 # Coverage Matrix -> GPU.
 point_set_g = torch.tensor(point_set).cuda().double()
 innerpoints_g = torch.tensor(inner_points).cuda().double()
-radius_g = torch.tensor(radius).cuda().double()
+radius_g = torch.as_tensor(radius).cuda().double()
 radius_g = radius_g[:,0]
 radius_g = radius_g.unsqueeze(0).repeat(len(point_set), 1)
 D = torch.cdist(point_set_g, innerpoints_g, p=2)
@@ -99,11 +98,14 @@ res_milp = milp(
     constraints=constraints,
     options=options)
 
-res_milp.x = [int(x_i) for x_i in res_milp.x]
-print(res_milp)
-print(np.sum(res_milp.x))
-value_pos = np.nonzero(res_milp.x)[0]
+# The solver returns floats close to 0/1; round them (truncating with int() drops
+# entries such as 0.9999999 and yields fewer points than the objective value).
+x = np.round(res_milp.x).astype(int)
+print(res_milp.message)
+print("Objective (number of selected balls): ", res_milp.fun)
+value_pos = np.nonzero(x)[0]
 print("The number of selected inner points: ", len(value_pos))
+print("Covered surface samples: %d / %d" % (np.count_nonzero(D[:, value_pos].sum(axis=1)), len(point_set)))
 save_obj("./output/mesh_selected_inner_points.obj", inner_points[value_pos])
 
 

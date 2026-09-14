@@ -70,13 +70,13 @@ save_obj("./output/pc_inner_points.obj", inner_points) # candidate inner points.
 # Coverage Matrix -> GPU.
 point_set_g = torch.tensor(point_set).cuda().double()
 innerpoints_g = torch.tensor(inner_points).cuda().double()
-radius_g = torch.tensor(radius).cuda().double()
+radius_g = torch.as_tensor(radius).cuda().double()
 radius_g = radius_g[:, 0]
 radius_g = radius_g.unsqueeze(0).repeat(len(point_set), 1)
 D = torch.cdist(point_set_g, innerpoints_g, p=2)
 D = torch.gt(radius_g, D).type(torch.int)
 D = D.cpu().numpy()
-candidates = innerpoints_g.numpy()
+candidates = innerpoints_g.cpu().numpy()
 # Done
 
 # solve by heuristic algorithm

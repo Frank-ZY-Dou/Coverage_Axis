@@ -88,16 +88,16 @@ pip install -r requirements.txt
 
 
 ## Mesh Input
-The input mesh `01Ants-12.off` is placed in the folder `input`. The mesh is normalized.
+The input mesh `01Ants-12_mesh.off` is placed in the folder `input`. The mesh is normalized.
 
 Specify the settings for Coverage Axis in ```Coverage_Axis_mesh.py```
 ```angular2html
-real_name = '01Ants-12'
+real_name = '01Ants-12_mesh'
 surface_sample_num = 2000
-dilation = 0.02
+dilation = 0.025
 # inner_points = "voronoi"
 inner_points = "random"
-max_time_SCP = 100 # in second
+max_time_SCP = 1000 # in second
 ```
 For Coverage Axis, Run
 ```angular2html
@@ -111,8 +111,10 @@ python Coverage_Axis_plusplus_mesh.py
 The outputs are placed in the folder `output`.
 - `mesh_inner_points.obj` contains the candidate inner points.
 - `mesh.obj` contains the input mesh.
-- `mesh_samples_2000.obj` contains the sampled surface points that are covered.
-- `mesh_selected_inner_points.obj` contains the selected inner points.
+- `mesh_samples_2000.obj` contains the sampled surface points that are covered (`mesh_samples_1500.obj` for Coverage Axis++, i.e., `mesh_samples_<surface_sample_num>.obj`).
+- `mesh_selected_inner_points.obj` contains the selected inner points. Coverage Axis++ additionally writes `mesh_selected_inner_points.txt`, one line `v x y z r` per selected point, where `r` is the radius of its medial ball.
+
+Note that all outputs except `mesh.obj` are point sets: these `.obj` files contain only `v` lines and no faces. A viewer that only renders triangles shows them as empty; use one that renders points (e.g., MeshLab).
 
 <p align="center">
 <img src="./assets/fig_results_mesh.png" 
@@ -131,7 +133,7 @@ python Coverage_Axis_mesh.py
 ```
 For Coverage Axis++, run
 ```angular2html
-python Coverage_Axis_plusplus_pc.py
+python Coverage_Axis_plusplus_mesh.py
 ```
 
 A GPU-accelerated exact solver for this point-selection step, with a
