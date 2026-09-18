@@ -85,7 +85,7 @@ conda activate CA
 pip install -r requirements.txt
 ```
 
-The skeleton connection step for mesh inputs uses [Q-MAT](https://github.com/Net-Maker/QMAT) (submodule `skel_connection/QMAT`, C++). It needs CGAL, GMP and MPFR; on Ubuntu:
+The skeleton connection step for mesh inputs uses [Q-MAT](https://github.com/Frank-ZY-Dou/QMAT) (submodule `skel_connection/QMAT`, C++; our copy of [Net-Maker/QMAT](https://github.com/Net-Maker/QMAT) with a fix in the simplification with selected poles, see below). It needs CGAL, GMP and MPFR; on Ubuntu:
 ```angular2html
 sudo apt install cmake build-essential libcgal-dev libgmp-dev libmpfr-dev
 cd skel_connection/QMAT && mkdir build && cd build && cmake -DCMAKE_BUILD_TYPE=Release .. && make -j4 && cd ../../..
@@ -151,6 +151,8 @@ Instead of the vertices of the medial axis, randomly generated points inside the
 python Coverage_Axis_connection.py --mesh ./input/01Ants-12_mesh.off --ma ./input/01Ants-12_mesh.ma --selected ./output/mesh_selected_inner_points.txt --out ./output/mesh_skeleton
 ```
 connects the selected inner points into a skeleton following Sec. 4.3 of the Coverage Axis paper (mesh input with candidates from the Voronoi diagram): the selected points are anchors on the initial medial axis, which is simplified onto them by the edge collapse of Q-MAT. An edge whose two endpoints are anchors is never collapsed, an edge with one anchor endpoint is collapsed onto the anchor, and an edge without anchor endpoints is collapsed onto the optimal sphere of Q-MAT, until only the anchors remain; the skeleton therefore inherits the connectivity of the medial axis. The script runs mode 2 of the Q-MAT executable (`--qmat` gives its path if it is not `./skel_connection/QMAT/build/QMAT`) and prints the size of the skeleton, its number of connected components (one for the ant) and the distance between the selected points and the skeleton vertices (Q-MAT can move an anchor slightly when a collapse onto it would fold the medial mesh).
+
+The Q-MAT copy in the submodule orders the edges incident to a selected point by the distance between the point and the other vertex, instead of the quadric error of the anchor sphere: the latter penalises the large medial balls, whose neighbourhood is then absorbed by smaller anchors, leaving the large ball connected by a single edge. The merged sphere and the collapse rules are unchanged.
 
 The outputs are placed in the folder `output`.
 - `mesh_skeleton.obj` contains the skeleton: the vertices (`v`), the edges (`l`) and the triangles (`f`). MeshLab and Blender display the edges and triangles.
