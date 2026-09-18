@@ -61,8 +61,9 @@ if inner_points == "voronoi":
     inner_point_path = './input/' + real_name + medial_path
     inner_points, radius = read_VD(inner_point_path)
     inner_points = np.array(inner_points)
-    radius = np.array(radius)
-    radius = radius + dilation
+    radius_ori = np.array(radius)
+    radius = radius_ori + dilation
+    radius_list = np.reshape(radius_ori, -1)
 
 else:
     print("Generating random samples inside the shape...")

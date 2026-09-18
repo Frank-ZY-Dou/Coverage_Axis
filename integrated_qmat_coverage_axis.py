@@ -121,10 +121,13 @@ def extract_vertices_from_ma(input_file, output_file):
     return len(vertices)
 
 
-def save_selected_points_for_qmat(points_with_radius, output_file):
-    """Save selected points in the format required by QMAT"""
+def save_selected_points_for_qmat(points_with_radius, output_file, scale):
+    """Save selected points in the format required by QMAT.
+
+    QMAT divides the coordinates and radii of the medial axis by the bounding-box diagonal of the mesh and matches
+    the selected points against them in that scale, so the points are written divided by the diagonal."""
     with open(output_file, 'w') as f:
-        for point in points_with_radius:
+        for point in points_with_radius / scale:
             f.write(f"v {point[0]} {point[1]} {point[2]} {point[3]}\n")
     print(f"Saved {len(points_with_radius)} selected points to {output_file}")
 
@@ -142,7 +145,7 @@ def run_qmat_step1(qmat_path, input_mesh_path, input_ma_path, target_vertices=50
     print(f"Executing command: {' '.join(cmd)}")
     
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        result = subprocess.run(cmd, stdin=subprocess.DEVNULL, capture_output=True, text=True, check=True)
         print("QMAT step 1 executed successfully")
         if result.stdout:
             print("Output:", result.stdout)
@@ -179,6 +182,7 @@ def run_coverage_axis(input_mesh_path, vd_file_path, output_dir, surface_sample_
     mesh_faces = np.array(mesh.faces)
     mesh_vertices = np.array(mesh.vertices)
     point_set = np.array(point_set[0])
+    bb_diagonal = float(np.linalg.norm(mesh_vertices.max(axis=0) - mesh_vertices.min(axis=0)))
     
     print(f"Mesh info: faces={mesh_faces.shape[0]}, vertices={mesh_vertices.shape[0]}, sampling points={point_set.shape[0]}")
     
@@ -233,7 +237,7 @@ def run_coverage_axis(input_mesh_path, vd_file_path, output_dir, surface_sample_
     # Save selected points for QMAT (format: v x y z r)
     points_with_radius = np.concatenate((selected_points, selected_radius), axis=1)
     selected_points_file = os.path.join(output_dir, "selected_points_for_qmat.txt")
-    save_selected_points_for_qmat(points_with_radius, selected_points_file)
+    save_selected_points_for_qmat(points_with_radius, selected_points_file, bb_diagonal)
     
     return True, selected_points_file
 
@@ -253,7 +257,7 @@ def run_qmat_step2(qmat_path, input_mesh_path, input_ma_path, target_vertices,
     print(f"Executing command: {' '.join(cmd)}")
     
     try:
-        result = subprocess.run(cmd, capture_output=True, text=True, check=True)
+        result = subprocess.run(cmd, stdin=subprocess.DEVNULL, capture_output=True, text=True, check=True)
         print("QMAT step 2 executed successfully")
         if result.stdout:
             print("Output:", result.stdout)

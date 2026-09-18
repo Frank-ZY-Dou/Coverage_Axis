@@ -18,6 +18,7 @@ Related: some geometry tools for MAT and related topics are in [Geometry_Tools](
 
 - **[June, 2026]** Added a GPU-accelerated exact solver for the Coverage Axis point-selection step (beta). It solves the same 0-1 set-cover program and returns the same optimal selection as the original (no heuristic), with the coverage matrix built on the GPU (NVIDIA Warp) and the integer program solved exactly. Includes a double-cover-of-a-torus example (offset the surface inward and outward, then cover both shells). See [`CA_GPU`](CA_GPU).
 - **[May, 2026]** Added an integrated pipeline with **GPU Q-MAT** (beta): a GPU re-implementation of Q-MAT medial-axis simplification (NVIDIA Warp), with native support for preserving Coverage Axis poles via `--selected-poles`. See [Geometry_Tools/QMAT_GPU](https://github.com/Frank-ZY-Dou/Geometry_Tools/tree/main/QMAT_GPU).
+- **[Sep, 2026]** Added the skeleton connection step for mesh inputs to the tutorial: [mesh_to_ma.py](mesh_to_ma.py) computes the initial medial axis of the mesh and [Coverage_Axis_connection.py](Coverage_Axis_connection.py) connects the selected inner points with Q-MAT (Sec. 4.3 of the paper).
 - **[Aug, 2025]** Added an integrated pipeline (credit to [Jiaxin Wang](https://github.com/Net-Maker)): [integrated_qmat_coverage_axis.py](https://github.com/Frank-ZY-Dou/Coverage_Axis/blob/main/integrated_qmat_coverage_axis.py). You will be using Q-MAT (see more instructions [here](https://github.com/Frank-ZY-Dou/Coverage_Axis/blob/main/skel_connection/README_EN.md)).
 
 🐱 **[Coverage Axis: Inner Point Selection for 3D Shape Skeletonization
@@ -84,6 +85,13 @@ conda activate CA
 pip install -r requirements.txt
 ```
 
+The skeleton connection step for mesh inputs uses [Q-MAT](https://github.com/Net-Maker/QMAT) (submodule `skel_connection/QMAT`, C++). It needs CGAL, GMP and MPFR; on Ubuntu:
+```angular2html
+sudo apt install cmake build-essential libcgal-dev libgmp-dev libmpfr-dev
+cd skel_connection/QMAT && mkdir build && cd build && cmake .. && make -j4 && cd ../../..
+```
+This produces the executable `skel_connection/QMAT/build/QMAT`. If the submodule folder is empty, run `git submodule update --init` first. The point-selection scripts do not need Q-MAT.
+
 # Usage
 
 
@@ -112,7 +120,8 @@ The outputs are placed in the folder `output`.
 - `mesh_inner_points.obj` contains the candidate inner points.
 - `mesh.obj` contains the input mesh.
 - `mesh_samples_2000.obj` contains the sampled surface points that are covered (`mesh_samples_1500.obj` for Coverage Axis++, i.e., `mesh_samples_<surface_sample_num>.obj`).
-- `mesh_selected_inner_points.obj` contains the selected inner points. Coverage Axis++ additionally writes `mesh_selected_inner_points.txt`, one line `v x y z r` per selected point, where `r` is the radius of its medial ball.
+- `mesh_selected_inner_points.obj` contains the selected inner points.
+- `mesh_selected_inner_points.txt` contains the selected inner points with the radii of their medial balls, one line `v x y z r` per point. It is the input of the skeleton connection step below.
 
 Note that all outputs except `mesh.obj` are point sets: these `.obj` files contain only `v` lines and no faces. A viewer that only renders triangles shows them as empty; use one that renders points (e.g., MeshLab).
 
@@ -135,6 +144,33 @@ For Coverage Axis++, run
 ```angular2html
 python Coverage_Axis_plusplus_mesh.py
 ```
+
+### Skeleton connection
+
+The selected inner points are connected into a skeleton following Sec. 4.3 of the Coverage Axis paper (mesh input): the initial medial axis of the mesh, i.e. its inner Voronoi diagram, is simplified by the edge collapse of Q-MAT while the selected points are kept as anchors, so that the connectivity of the medial axis is inherited by the selected points. This needs the Q-MAT executable (see [Installation](#installation)).
+
+First compute the initial medial axis of the mesh (the Voronoi diagram of the mesh vertices restricted to the inside of the mesh, written in the `.ma` format of Q-MAT; a few seconds):
+```angular2html
+python mesh_to_ma.py --mesh ./input/01Ants-12_mesh.off --out ./input/01Ants-12_mesh.ma
+```
+Then connect the selected inner points:
+```angular2html
+python Coverage_Axis_connection.py --mesh ./input/01Ants-12_mesh.off --ma ./input/01Ants-12_mesh.ma --selected ./output/mesh_selected_inner_points.txt --out ./output/mesh_skeleton
+```
+(`--qmat` gives the path of the Q-MAT executable if it is not `./skel_connection/QMAT/build/QMAT`.) Each selected point is snapped to its nearest medial axis vertex, and Q-MAT collapses all other vertices into the anchors (an edge whose two endpoints are both anchors is never collapsed). The script prints the size of the skeleton, its number of connected components and the distance between the selected points and the skeleton vertices (Q-MAT can move an anchor slightly when the collapse onto it would fold the medial mesh).
+
+The outputs are placed in the folder `output`.
+- `mesh_skeleton.obj` contains the skeleton: the vertices (`v`), the edges (`l`) and the triangles (`f`). MeshLab and Blender display the edges and triangles.
+- `mesh_skeleton.ma` contains the same skeleton with the radii of the medial balls in the `.ma` format of Q-MAT (`nv ne nf` header, then `v x y z r`, `e i j` and `f i j k` with 0-based indices).
+
+<p align="center">
+<img src="./assets/fig_results_skeleton.png" 
+        alt="Picture" 
+        width="420" 
+        style="display: block; margin: 0 auto" />
+</p>
+
+The same two commands work for the output of Coverage Axis++ (`Coverage_Axis_plusplus_mesh.py` writes the same `mesh_selected_inner_points.txt`).
 
 A GPU-accelerated exact solver for this point-selection step, with a
 double-cover example, is in [`CA_GPU`](CA_GPU). Offsetting a surface inward and
@@ -248,15 +284,20 @@ Press "2" twice to toggle between viewing the full query point cloud and the poi
 Once you run this code, you will get the output ```01Ants-12_mesh_inner_points.obj``` - inner candidate points. Please rename it to `01Ants-12_pc_random.obj` and move it to the folder `input`. 
 You can downsample the inner points if you want.
 
-Then run
+Then, for Coverage Axis, run
 ```angular2html
 python Coverage_Axis_pc.py
+```
+For Coverage Axis++, run
+```angular2html
+python Coverage_Axis_plusplus_pc.py
 ```
 
 The outputs are placed in the folder `output`.
 - `pc_inner_points.obj` contains the candidate inner points.
 - `pc_samples.obj` contains the points of the point cloud that is covered. **SCP is an NP-hard problem; make sure the number of to-be-covered samples is not that large.** 
 - `pc_selected_inner_points.obj` contains the selected inner points.
+- `pc_selected_inner_points.txt` contains the selected inner points with the radii of their medial balls (`v x y z r`).
 
 <p align="center">
 <img src="./assets/fig_results_pc.png" 
@@ -303,7 +344,7 @@ disp('min_number:');
 disp(fval);
 ```
 ### Get connection result
-We use Q-MAT to get connection result, please refer to [this document](./skel_connection/README.md). It has only been test on Ubuntu22.04.
+The skeleton connection of the tutorial above ([mesh_to_ma.py](mesh_to_ma.py) + [Coverage_Axis_connection.py](Coverage_Axis_connection.py)) uses Q-MAT. [integrated_qmat_coverage_axis.py](integrated_qmat_coverage_axis.py) is an all-in-one variant (Q-MAT pre-simplification of a given `.ma`, Coverage Axis++ selection, Q-MAT connection), see [skel_connection](./skel_connection/README_EN.md). Both have only been tested on Ubuntu 22.04.
 
 
 # Citation

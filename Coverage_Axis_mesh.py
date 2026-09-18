@@ -4,7 +4,7 @@ import torch
 import trimesh
 import numpy as np
 from tqdm import tqdm
-from utils import  save_obj,read_VD, winding_number
+from utils import save_obj, save_txt, read_VD, winding_number
 from scipy.optimize import milp, Bounds, LinearConstraint
 
 
@@ -28,8 +28,8 @@ if inner_points == "voronoi":
     inner_point_path  = './input/'+real_name+medial_path
     inner_points, radius = read_VD(inner_point_path)
     inner_points = np.array(inner_points)
-    radius = np.array(radius)
-    radius = radius + dilation
+    radius_ori = np.array(radius)
+    radius = radius_ori + dilation
 
 else:
     print("Generating random samples inside the shape...")
@@ -66,6 +66,7 @@ else:
     point_set_g = torch.tensor(point_set).cuda().double()
     dist = torch.cdist(inner_points_g, point_set_g, p=2)
     radius = dist.topk(1, largest=False).values
+    radius_ori = radius.cpu().numpy()
     radius = radius + dilation
 
 save_obj("./output/mesh.obj", mesh_vertices, mesh_faces)
@@ -98,6 +99,9 @@ res_milp = milp(
     constraints=constraints,
     options=options)
 
+if res_milp.x is None:
+    raise RuntimeError("No feasible cover found (%s): some surface samples are not covered by any candidate ball. "
+                       "Increase dilation or use more candidates." % res_milp.message)
 # The solver returns floats close to 0/1; round them (truncating with int() drops
 # entries such as 0.9999999 and yields fewer points than the objective value).
 x = np.round(res_milp.x).astype(int)
@@ -107,6 +111,7 @@ value_pos = np.nonzero(x)[0]
 print("The number of selected inner points: ", len(value_pos))
 print("Covered surface samples: %d / %d" % (np.count_nonzero(D[:, value_pos].sum(axis=1)), len(point_set)))
 save_obj("./output/mesh_selected_inner_points.obj", inner_points[value_pos])
+save_txt("./output/mesh_selected_inner_points.txt", np.concatenate((inner_points[value_pos], radius_ori[value_pos]), axis=1))
 
 
 
