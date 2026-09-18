@@ -46,8 +46,8 @@ def compute_min_distances(X, selected_pts):
 real_name = '01Ants-12_mesh'
 surface_sample_num = 1500
 dilation = 0.02
-# inner_points = "voronoi"
-inner_points = "random"
+inner_points = "voronoi"
+# inner_points = "random"
 
 mesh = trimesh.load('./input/%s.off' % real_name)
 point_set = trimesh.sample.sample_surface(mesh, surface_sample_num)
@@ -124,7 +124,7 @@ candidates = innerpoints_g.cpu().numpy()
 # Done
 
 # solve by heuristic algorithm
-value_pos, grade, coverage_rate = heuristic_alg(D, candidates, radius_list, reg_radius=1, reg=1, max_iter=50, penalty='')
+value_pos, grade, coverage_rate = heuristic_alg(D, candidates, radius_list, reg_radius=1, reg=1, max_iter=100, penalty='')
 print("Coverage rate: ", 100*(1-coverage_rate), "%")
 print("The number of selected inner points: ", len(value_pos))
 save_obj("./output/mesh_selected_inner_points.obj", inner_points[value_pos])

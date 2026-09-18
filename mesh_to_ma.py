@@ -11,6 +11,10 @@ all inside is written as a fan of triangles. The result is written in the .ma fo
     e i j
     f i j k
 
+The vertices of the medial axis are also written, with their radii, to ``<out>_VD.txt`` (one ``v x y z r`` line per
+vertex): they are the Voronoi candidates of the inner point selection (``inner_points = "voronoi"`` in
+Coverage_Axis_mesh.py and Coverage_Axis_plusplus_mesh.py).
+
 Example:
     python mesh_to_ma.py --mesh ./input/01Ants-12_mesh.off --out ./input/01Ants-12_mesh.ma
 """
@@ -111,8 +115,13 @@ def main():
     points, faces = np.asarray(mesh.vertices, dtype=float), np.asarray(mesh.faces)
     centers, radii, edges, tris = inner_voronoi_diagram(points, faces)
     write_ma(args.out, centers, radii, edges, tris)
+    candidates = (args.out[:-3] if args.out.endswith('.ma') else args.out) + '_VD.txt'
+    with open(candidates, 'w') as f:
+        for c, r in zip(centers, radii):
+            f.write('v %.15f %.15f %.15f %.15f\n' % (c[0], c[1], c[2], r))
     print("Mesh: %d vertices, %d faces" % (len(points), len(faces)))
     print("Medial axis: %d vertices, %d edges, %d faces -> %s" % (len(centers), len(edges), len(tris), args.out))
+    print("Candidate inner points for the selection: %d -> %s" % (len(centers), candidates))
 
 
 if __name__ == '__main__':

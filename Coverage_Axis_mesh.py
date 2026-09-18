@@ -10,9 +10,9 @@ from scipy.optimize import milp, Bounds, LinearConstraint
 
 real_name = '01Ants-12_mesh'
 surface_sample_num = 2000
-dilation = 0.025
-# inner_points = "voronoi"
-inner_points = "random"
+dilation = 0.02
+inner_points = "voronoi"
+# inner_points = "random"
 max_time_SCP = 1000 # in second
 
 
