@@ -124,7 +124,7 @@ candidates = innerpoints_g.cpu().numpy()
 # Done
 
 # solve by heuristic algorithm
-value_pos, grade, coverage_rate = heuristic_alg(D, candidates, radius_list, reg_radius=1, reg=0.5, max_iter=100, penalty='stand')
+value_pos, grade, coverage_rate = heuristic_alg(D, candidates, radius_list, reg_radius=1, reg=1, max_iter=100, penalty='')
 print("Coverage rate: ", 100*(1-coverage_rate), "%")
 print("The number of selected inner points: ", len(value_pos))
 save_obj("./output/mesh_selected_inner_points.obj", inner_points[value_pos])
